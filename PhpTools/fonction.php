@@ -90,10 +90,10 @@ function GetId($name){
 
 function GetNomPort($id_port){
 
-    $servname = getJsonElement('../../log.json','BDDlog','serveurname');
-    $dbname = getJsonElement('../../log.json','BDDlog','dbname');
-    $user = getJsonElement('../../log.json','BDDlog','login');
-    $pass = getJsonElement('../../log.json','BDDlog','mdp');
+    $servname = getJsonElement('../log.json','BDDlog','serveurname');
+    $dbname = getJsonElement('../log.json','BDDlog','dbname');
+    $user = getJsonElement('../log.json','BDDlog','login');
+    $pass = getJsonElement('../log.json','BDDlog','mdp');
     $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
 
     
@@ -107,10 +107,10 @@ function GetNomPort($id_port){
 
 function GetNomBateau($id_bateau){
 
-    $servname = getJsonElement('../../log.json','BDDlog','serveurname');
-    $dbname = getJsonElement('../../log.json','BDDlog','dbname');
-    $user = getJsonElement('../../log.json','BDDlog','login');
-    $pass = getJsonElement('../../log.json','BDDlog','mdp');
+    $servname = getJsonElement('../log.json','BDDlog','serveurname');
+    $dbname = getJsonElement('../log.json','BDDlog','dbname');
+    $user = getJsonElement('../log.json','BDDlog','login');
+    $pass = getJsonElement('../log.json','BDDlog','mdp');
     $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
 
     
@@ -143,10 +143,10 @@ function GetTableauLiaisonsDuSecteur($secteur){
 
     $tableau_liaisons = [];
 
-    $servname = getJsonElement('../../log.json','BDDlog','serveurname');
-    $dbname = getJsonElement('../../log.json','BDDlog','dbname');
-    $user = getJsonElement('../../log.json','BDDlog','login');
-    $pass = getJsonElement('../../log.json','BDDlog','mdp');
+    $servname = getJsonElement('../log.json','BDDlog','serveurname');
+    $dbname = getJsonElement('../log.json','BDDlog','dbname');
+    $user = getJsonElement('../log.json','BDDlog','login');
+    $pass = getJsonElement('../log.json','BDDlog','mdp');
     $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
 
     $sql = $dbco->prepare('SELECT * FROM secteur WHERE nom = ?');

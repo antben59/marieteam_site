@@ -12,8 +12,8 @@ if(isset($_POST['sended'])){ // Form de admin
     $login = noEmpty($_POST['login']);
     $mdp = noEmpty($_POST['mdp']);
 
-    $loginSERVEUR = getJsonElement("../../log.json", "adminPanel", "login");
-    $mdpSERVER =  getJsonElement("../../log.json", "adminPanel", "mdp");
+    $loginSERVEUR = getJsonElement("../log.json", "adminPanel", "login");
+    $mdpSERVER =  getJsonElement("../log.json", "adminPanel", "mdp");
 
     if($login == $loginSERVEUR && $mdp == $mdpSERVER){
         $_SESSION['admin'] = true;
