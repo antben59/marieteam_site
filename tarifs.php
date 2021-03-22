@@ -65,7 +65,7 @@
             <div class="media d-block media-feature text-center">
               <span class="flaticon-blueprint icon"></span>
               <div class="media-body">
-                <h3 class="mt-0 text-black">Pre-Construction</h3>
+                <h3 class="mt-0 text-black">Pre-Construction-</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 <p><a href="#" class="btn btn-outline-primary btn-sm">Learn More</a></p>
               </div>
