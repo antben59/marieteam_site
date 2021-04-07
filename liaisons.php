@@ -1,6 +1,10 @@
 <?php
 session_start();
-require_once('db_connect.php'); ?>
+require_once('db_connect.php'); 
+
+
+
+?>
    <!-- header -->
     <!doctype html>
 <html lang="fr">
@@ -71,63 +75,91 @@ require_once('db_connect.php'); ?>
         </div>
       </nav>
     </header>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    <section class="section">
-          <div class="row justify-content-center mb-5 element-animate">
-          <div class="col-md-8 text-center">
-            <h2 class="text-uppercase heading border-bottom mb-4">Services</h2>
-            <p class="mb-3 lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+    <section class="inner-page">
+      <div class="slider-item py-5" style="background-image: url('img/slider-1.jpg');">
+        
+        <div class="container">
+          <div class="row slider-text align-items-center justify-content-center text-center">
+            <div class="col-md-7 col-sm-12 element-animate">
+              <h1 class="text-white">Besoin d'aide ?</h1>
+            </div>
           </div>
         </div>
+
       </div>
-      <div class="container">
+    </section>
+    
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+
+      $(".secteur").change(function() {
+        var secteur_id = $(this).val();
+        $.ajax({
+          url: "liaison_secteur.php",
+          method:"POST",
+          data:{secteur_id:secteur_id},
+          success:function(data) {
+            $(".liaison").html(data);
+          }
+        });
+      });
+    });
+  </script>
+
+    <section class="section">
+    <div class="container">
           <div class="col-md-12">
           <h5>Choisir les informations relatives à la liaison</h5>
           <div class="alert alert-danger" role="alert">ERROR 402 : Base de données compromis</div>
             <form action="#" method="post">
               <div class="row">
+
                 <div class="col-md-4 form-group">
                   <label for="secteur">Secteur</label>
-
-                  <select class="form-control" id="secteur">
-                  <option value="0"; ?>Séléctionnez votre secteur</option>
-          
-                  <?php
-                  $secteur = $dbco->query('SELECT nom, id_secteur FROM secteur GROUP BY nom ORDER BY nom ASC');
+                  <select class="form-control linked-select" id="secteur" name="secteur" >
+                    <option value="0"; ?>Séléctionnez votre secteur</option>
+                    <?php
+                  $secteur = get_bdd()->query('SELECT nom, id_secteur FROM secteur GROUP BY nom ORDER BY nom ASC');
                   while($liste_secteur = $secteur->fetch())
                   {
                   ?>
-                          <option value="<?= $liste_secteur['id_secteur']; ?>"><?= $liste_secteur['nom']; ?></option>
+                    <option value="<?= $liste_secteur['id_secteur']; ?>"><?= $liste_secteur['nom']; ?></option>
                   <?php } ?>
-                        </select>
-
+                  </select>
                 </div>
+
+
+
                 <div class="col-md-4 form-group">
                   <label for="liaison">Liaison</label>
-
-                  <select class="form-control" id="liaison">
-                  
-                  <option value="0"; ?>Séléctionnez votre liaison</option>
-
+                  <select class="form-control" id="liaison" name="liaison">
+                    <option value="0"; ?>Séléctionnez votre liaison</option>
                   </select>
-                
                 </div>
+
                 <div class="col-md-4 form-group">
                   <label for="date">Date</label>
                   <input class="form-control" type="date" value="" id="date">
                 </div>
               </div>
-             
+
               <div class="row justify-content-center">
                 <div class="col-md-4 form-group">
                   <input type="submit" style="margin:30px;" value="Afficher les traversées" class="btn btn-primary btn-md btn-block">
                 </div>
               </div>
             </form>
-<!--
-            <table class="table table-bordered" style="margin-top:20px;">
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section>
+<div class="container">
+<div class="col-md-12">
+<table class="table table-bordered" style="margin-top:20px;">
                   <thead>
                     <tr>
                       <th colspan=3 style="text-align:center;">Traversée</th>
@@ -153,11 +185,9 @@ require_once('db_connect.php'); ?>
                   </tr> 
                   </tbody>
                 </table>
-            -->
-          </div>
-        </div>
-      </div>
-    </section>
+</div>
+</div>
+</section>
     <!-- footer -->
     <?php include('PhpTools/footer.php');?>
     <!-- footer -->
