@@ -1,7 +1,28 @@
 <?php
 session_start();
 require_once('db_connect.php'); 
+if(isset($_POST['connexion'])){
 
+  $mail = htmlspecialchars($_POST['mail'], ENT_QUOTES);
+  $pwd = htmlspecialchars($_POST['mot_de_passe'], ENT_QUOTES);
+  $sql = get_bdd()->prepare("SELECT * FROM utilisateurs WHERE mail ='$mail'");
+  $sql->execute();
+  $n_id = $sql->rowCount();
+
+  if($n_id > 0){
+
+      $get_infos = $sql->fetch();
+      $pwd_hash = $get_infos['mot_de_passe'];
+
+          if($pwd == $pwd_hash){
+                  $_SESSION['id_utilisateur'] = $get_infos['id'];
+      }
+
+  }
+}
+  if (isset($_SESSION["id_utilisateur"])) {
+    header("Location: mes-reservations.php");
+  }
 
 
 ?>
@@ -77,82 +98,75 @@ require_once('db_connect.php');
     </header>
     <section class="inner-page">
       <div class="slider-item py-5" style="background-image: url('img/slider-1.jpg');">
-        
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center text-center">
             <div class="col-md-7 col-sm-12 element-animate">
-              <h1 class="text-white">Besoin d'aide ?</h1>
+              <h1 class="text-white">Envie d'une traversée ?</h1>
             </div>
           </div>
         </div>
-
       </div>
     </section>
-    
     <section class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-7">
-            <form action="" method="post">
+          <div class="col-md-6">
+          <h1>Inscription</h1>
+            <form action="connexion_inscription.php" method="post">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label for="nom">Nom</label>
-                  <input type="text" class="form-control form-control-lg" id="nom" required>
+                  <input type="text" class="form-control form-control-lg" id="nom" name="nom" required>
                 </div>
                 <div class="col-md-6 form-group">
                   <label for="prenom">Prénom</label>
-                  <input type="text" class="form-control form-control-lg" id="prenom" required>
+                  <input type="text" class="form-control form-control-lg" id="prenom" name="prenom" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label for="email">Email</label>
-                  <input type="email" id="email" class="form-control form-control-lg" required>
+                  <input type="email" id="email" class="form-control form-control-lg" name="mail" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label for="objet">Objet</label>
-                    <select class="form-control form-control-lg" id="objet">
-                      <option>Demande de renseignement</option>
-                      <option>Demande de modification</option>
-                      <option>Demande d'annulation</option>
-                      <option>Autres..</option>
-                    </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <label for="message">Message</label>
-                  <textarea name="message" id="message" class="form-control form-control-lg" cols="30" rows="8" required></textarea>
+                  <label for="nom">Mot de passe</label>
+                  <input type="password" class="form-control form-control-lg" id="nom" name="mot_de_passe" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="submit" value="Envoyer votre message" class="btn btn-primary btn-lg btn-block">
+                  <button type="submit" name="inscription" class="btn btn-primary btn-lg btn-block">S'enregistrer</button>
                 </div>
               </div>
-              <?php
-                    $retour = mail('dylan.decool14@gmail.com', 'fghjk', 'dfghj', 'fghjk');
-                    if($retour) {
-                        echo '<p>Votre message a bien été envoyé.</p>';
-                    }else
-                    {
-                        echo '<p>Une erreur c\'est produite lors de l\'envois de l\'email.</p>';
-                    }
-              ?>
+
             </form>
           </div>
-          <div class="col-md-1"></div>
-          <div class="col-md-4">
-            <h5 class="text-uppercase mb-3">Adresse</h5>
-            <p class="mb-5">34 rue de la paix, <br> Lille <br> France</p>
-            
-            <h5 class="text-uppercase mb-3">Email</h5>
-            <p class="mb-5"><a href="mailto:info@marieteam.com">info@marieteam.com</a> <br> <a href="mailto:contact@marieteam.com">contact@marieteam.com</a></p>
-            
-            <h5 class="text-uppercase mb-3">Téléphone</h5>
-            <p class="mb-5">+33 8 25 12 89 85</p>
+          <div class="col-md-6">
+          <h1>Connexion</h1>
+          <form action="connexion_inscription.php" method="post">
+          <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" class="form-control form-control-lg" name="mail" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="email">Mot de passe</label>
+                  <input type="password" id="email" class="form-control form-control-lg" name="mot_de_passe" required>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                <button type="submit" name="connexion"class="btn btn-primary btn-lg btn-block">Connexion</button>
+
+                </div>
+              </div>
+
+            </form>
           </div>
         </div>
       </div>
@@ -173,3 +187,57 @@ require_once('db_connect.php');
     <script src="js/main.js"></script>
   </body>
 </html>
+
+
+
+
+
+<?php
+if(isset($_POST['inscription'])){
+  if(
+      !empty($_POST['nom'])
+      && !empty($_POST['prenom'])
+      && !empty($_POST['mail'])
+      && !empty($_POST['mot_de_passe'])
+  ){
+      $nom = htmlspecialchars($_POST['nom'], ENT_QUOTES);
+      $prenom = htmlspecialchars($_POST['prenom'], ENT_QUOTES);
+      $mail = htmlspecialchars(strtolower($_POST['mail']), ENT_QUOTES);
+      $mot_de_passe = htmlspecialchars($_POST['mot_de_passe'], ENT_QUOTES);
+
+
+
+              try{
+                  $sql = "INSERT INTO utilisateurs(
+                      id,
+                      nom,
+                      prenom,
+                      mail,
+                      mot_de_passe,
+                      grade
+                      )
+                      values (
+                        null,
+                      '$nom',
+                      '$prenom',
+                      '$mail',
+                      '$mot_de_passe',
+                      '0'
+                      )";
+
+                  $req = get_bdd()->prepare($sql);
+                  $req->execute();
+
+
+                }
+                catch (Exception $e) {
+                    echo 'Exception reçue : ',  $e->getMessage(), "\n";
+                }
+
+            }
+
+        }
+
+
+
+?>

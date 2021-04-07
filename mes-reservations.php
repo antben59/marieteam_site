@@ -2,6 +2,9 @@
 session_start();
 require_once('db_connect.php'); 
 
+  if (!isset($_SESSION["id_utilisateur"])) {
+    header("Location: index.php");
+  }
 
 
 ?>
@@ -81,7 +84,7 @@ require_once('db_connect.php');
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center text-center">
             <div class="col-md-7 col-sm-12 element-animate">
-              <h1 class="text-white">Besoin d'aide ?</h1>
+              <h1 class="text-white">Mes réservations</h1>
             </div>
           </div>
         </div>
@@ -92,7 +95,7 @@ require_once('db_connect.php');
     <section class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-7">
+          <div class="col-md-12">
             <form action="" method="post">
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -132,27 +135,8 @@ require_once('db_connect.php');
                   <input type="submit" value="Envoyer votre message" class="btn btn-primary btn-lg btn-block">
                 </div>
               </div>
-              <?php
-                    $retour = mail('dylan.decool14@gmail.com', 'fghjk', 'dfghj', 'fghjk');
-                    if($retour) {
-                        echo '<p>Votre message a bien été envoyé.</p>';
-                    }else
-                    {
-                        echo '<p>Une erreur c\'est produite lors de l\'envois de l\'email.</p>';
-                    }
-              ?>
+
             </form>
-          </div>
-          <div class="col-md-1"></div>
-          <div class="col-md-4">
-            <h5 class="text-uppercase mb-3">Adresse</h5>
-            <p class="mb-5">34 rue de la paix, <br> Lille <br> France</p>
-            
-            <h5 class="text-uppercase mb-3">Email</h5>
-            <p class="mb-5"><a href="mailto:info@marieteam.com">info@marieteam.com</a> <br> <a href="mailto:contact@marieteam.com">contact@marieteam.com</a></p>
-            
-            <h5 class="text-uppercase mb-3">Téléphone</h5>
-            <p class="mb-5">+33 8 25 12 89 85</p>
           </div>
         </div>
       </div>
