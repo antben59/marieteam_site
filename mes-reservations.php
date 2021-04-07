@@ -61,7 +61,7 @@ require_once('db_connect.php');
                 <a class="nav-link" href="mes-reservations.php">Mes réservations</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/index.php">Panel d'administration</a>
+                <a class="nav-link" href="/admin/index.php">Administration</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="deconnexion.php">Déconnexion</a>
@@ -96,47 +96,28 @@ require_once('db_connect.php');
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <form action="" method="post">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <label for="nom">Nom</label>
-                  <input type="text" class="form-control form-control-lg" id="nom" required>
-                </div>
-                <div class="col-md-6 form-group">
-                  <label for="prenom">Prénom</label>
-                  <input type="text" class="form-control form-control-lg" id="prenom" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" class="form-control form-control-lg" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <label for="objet">Objet</label>
-                    <select class="form-control form-control-lg" id="objet">
-                      <option>Demande de renseignement</option>
-                      <option>Demande de modification</option>
-                      <option>Demande d'annulation</option>
-                      <option>Autres..</option>
-                    </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <label for="message">Message</label>
-                  <textarea name="message" id="message" class="form-control form-control-lg" cols="30" rows="8" required></textarea>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="submit" value="Envoyer votre message" class="btn btn-primary btn-lg btn-block">
-                </div>
-              </div>
+            <h1>dedeed</h1><br>
+          <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Nom Prénom</th>
+            <th scope="col">Prestation</th>
+            <th scope="col">Date et heure</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">Etat</th>
+          </tr>
+        </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-            </form>
+    </tbody>
+  </table>
           </div>
         </div>
       </div>
