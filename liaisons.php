@@ -88,24 +88,6 @@ require_once('db_connect.php');
 
       </div>
     </section>
-    
-  <script type="text/javascript">
-
-    $(document).ready(function() {
-
-      $(".secteur").change(function() {
-        var secteur_id = $(this).val();
-        $.ajax({
-          url: "liaison_secteur.php",
-          method:"POST",
-          data:{secteur_id:secteur_id},
-          success:function(data) {
-            $(".liaison").html(data);
-          }
-        });
-      });
-    });
-  </script>
 
     <section class="section">
     <div class="container">
@@ -117,15 +99,8 @@ require_once('db_connect.php');
 
                 <div class="col-md-4 form-group">
                   <label for="secteur">Secteur</label>
-                  <select class="form-control linked-select" id="secteur" name="secteur" >
+                  <select class="form-control linked-select" id="country" name="secteur">
                     <option value="0"; ?>Séléctionnez votre secteur</option>
-                    <?php
-                  $secteur = get_bdd()->query('SELECT nom, id_secteur FROM secteur GROUP BY nom ORDER BY nom ASC');
-                  while($liste_secteur = $secteur->fetch())
-                  {
-                  ?>
-                    <option value="<?= $liste_secteur['id_secteur']; ?>"><?= $liste_secteur['nom']; ?></option>
-                  <?php } ?>
                   </select>
                 </div>
 
@@ -133,7 +108,7 @@ require_once('db_connect.php');
 
                 <div class="col-md-4 form-group">
                   <label for="liaison">Liaison</label>
-                  <select class="form-control" id="liaison" name="liaison">
+                  <select class="form-control" id="state" name="liaison">
                     <option value="0"; ?>Séléctionnez votre liaison</option>
                   </select>
                 </div>
@@ -182,7 +157,7 @@ require_once('db_connect.php');
                     <td style="text-align:center;">238</td>
                     <td style="text-align:center;">11</td>
                     <td style="text-align:center;">2</td>
-                  </tr> 
+                  </tr>
                   </tbody>
                 </table>
 </div>
@@ -201,5 +176,42 @@ require_once('db_connect.php');
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.waypoints.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+  	function loadData(type, category_id){
+  		$.ajax({
+  			url : "liaison_secteur.php",
+  			type : "POST",
+  			data: {type : type, id : category_id},
+  			success : function(data){
+  				if(type == "stateData"){
+  					$("#state").html(data);
+  				}else{
+  					$("#country").append(data);
+  				}
+  				
+  			}
+  		});
+  	}
+
+  	loadData();
+
+  	$("#country").on("change",function(){
+  		var country = $("#country").val();
+
+  		if(country != ""){
+  			loadData("stateData", country);
+  		}else{
+  			$("#state").html("");
+  		}
+
+  		
+  	})
+  });
+</script>
+
   </body>
 </html>
