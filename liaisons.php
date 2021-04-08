@@ -1,16 +1,13 @@
 <?php
 session_start();
-require_once('db_connect.php'); 
-
-
-
+require_once('db_connect.php')
 ?>
    <!-- header -->
     <!doctype html>
 <html lang="fr">
   <head>
     <title>MarieTeam</title>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=K2D:400,700|Niramit:300,700" rel="stylesheet">
@@ -93,13 +90,12 @@ require_once('db_connect.php');
     <div class="container">
           <div class="col-md-12">
           <h5>Choisir les informations relatives à la liaison</h5>
-          <div class="alert alert-danger" role="alert">ERROR 402 : Base de données compromis</div>
             <form action="#" method="post">
               <div class="row">
 
                 <div class="col-md-4 form-group">
                   <label for="secteur">Secteur</label>
-                  <select class="form-control linked-select" id="country" name="secteur">
+                  <select class="form-control linked-select" id="country" name="secteur" required>
                     <option value="0"; ?>Séléctionnez votre secteur</option>
                   </select>
                 </div>
@@ -115,13 +111,13 @@ require_once('db_connect.php');
 
                 <div class="col-md-4 form-group">
                   <label for="date">Date</label>
-                  <input class="form-control" type="date" value="" id="date">
+                  <input class="form-control" type="date" id="date" name="date" required>
                 </div>
               </div>
 
               <div class="row justify-content-center">
                 <div class="col-md-4 form-group">
-                  <input type="submit" style="margin:30px;" value="Afficher les traversées" class="btn btn-primary btn-md btn-block">
+                  <button type="submit" style="margin:30px;" class="btn btn-primary btn-md btn-block" name="afficher">Afficher les traversées</button>
                 </div>
               </div>
             </form>
@@ -134,6 +130,17 @@ require_once('db_connect.php');
 <section>
 <div class="container">
 <div class="col-md-12">
+<?php if(isset($_POST['afficher'])){
+  $secteur = $_POST['secteur'];
+  $liaison = $_POST['liaison'];
+  $date = $_POST['date'];
+  $dateFormat = date('d/m/Y', strtotime($date));
+  $nomSecteur = get_bdd()->query("SELECT nom FROM secteur WHERE id_secteur='$secteur'")->fetch();
+  $NomLiaison = get_bdd()->query("SELECT nom FROM liaison WHERE code_liaison='$liaison'")->fetch();
+  ?>
+  <p style="font-size: 20px;text-align:center;">Vous avez choisi la liason : <span style="font-weight:bold;"><?php echo $NomLiaison['nom'] ; ?></span>, du secteur : <span style="font-weight:bold;"><?php echo $nomSecteur['nom'] ; ?></span>  pour la date du : <span style="font-weight:bold;"><?php echo $dateFormat; ?></span>.</p>
+<?php
+} ?>
 <table class="table table-bordered" style="margin-top:20px;">
                   <thead>
                     <tr>
