@@ -78,7 +78,7 @@ require_once('db_connect.php')
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center text-center">
             <div class="col-md-7 col-sm-12 element-animate">
-              <h1 class="text-white">Besoin d'aide ?</h1>
+              <h1 class="text-white">Envie d'une traversée ?</h1>
             </div>
           </div>
         </div>
@@ -99,8 +99,6 @@ require_once('db_connect.php')
                     <option value="0"; ?>Séléctionnez votre secteur</option>
                   </select>
                 </div>
-
-
 
                 <div class="col-md-4 form-group">
                   <label for="liaison">Liaison</label>
@@ -139,9 +137,7 @@ require_once('db_connect.php')
   $NomLiaison = get_bdd()->query("SELECT nom FROM liaison WHERE code_liaison='$liaison'")->fetch();
   ?>
   <p style="font-size: 20px;text-align:center;">Vous avez choisi la liason : <span style="font-weight:bold;"><?php echo $NomLiaison['nom'] ; ?></span>, du secteur : <span style="font-weight:bold;"><?php echo $nomSecteur['nom'] ; ?></span>  pour la date du : <span style="font-weight:bold;"><?php echo $dateFormat; ?></span>.</p>
-<?php
-} ?>
-<table class="table table-bordered" style="margin-top:20px;">
+  <table class="table table-bordered" style="margin-top:20px;">
                   <thead>
                     <tr>
                       <th colspan=3 style="text-align:center;">Traversée</th>
@@ -167,6 +163,8 @@ require_once('db_connect.php')
                   </tr>
                   </tbody>
                 </table>
+<?php
+} ?>
 </div>
 </div>
 </section>
@@ -183,9 +181,8 @@ require_once('db_connect.php')
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.waypoints.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
-    <script type="text/javascript" src="js/jquery.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function(){
   	function loadData(type, category_id){
