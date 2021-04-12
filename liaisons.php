@@ -153,14 +153,29 @@ require_once('db_connect.php')
                       <td style="text-align:center;">B Véh.inf.2m</td>
                       <td style="text-align:center;">B Véh.sup.2m</td>
                   </tr>
+
+                  <?php
+                  $req = get_bdd()->query("SELECT * FROM traversee where code_liaison='$liaison' && date='$date'");
+                  while ($donnees = $req->fetch()){
+                  ?>
                   <tr>
-                    <td style="text-align:center;">541197</td>
-                    <td style="text-align:center;">07:45</td>
-                    <td style="text-align:center;">Kor' Ant</td>
-                    <td style="text-align:center;">238</td>
-                    <td style="text-align:center;">11</td>
-                    <td style="text-align:center;">2</td>
+                    <td style="text-align:center;"><?php echo $donnees['num_traversee']; ?></td>
+                    <td style="text-align:center;"><?php echo $donnees['heure']; ?></td>
+                    <td style="text-align:center;">
+                    <?php
+                      $NomBateau = get_bdd()->query("SELECT nom FROM bateau INNER JOIN traversee ON bateau.id_bateau = traversee.id_bateau")->fetch();
+                      echo $NomBateau['nom'];
+                    ?>
+                    </td>
+                    <td style="text-align:center;"><?php echo ""; ?></td>
+                    <td style="text-align:center;"><?php echo ""; ?></td>
+                    <td style="text-align:center;"><?php echo ""; ?></td>
+
                   </tr>
+
+                  <?php
+                  }
+                  ?>
                   </tbody>
                 </table>
 <?php
