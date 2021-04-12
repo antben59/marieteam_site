@@ -160,16 +160,22 @@ require_once('db_connect.php')
                   ?>
                   <tr>
                     <td style="text-align:center;"><?php echo $donnees['num_traversee']; ?></td>
-                    <td style="text-align:center;"><?php echo $donnees['heure']; ?></td>
+                    <td style="text-align:center;"><?php echo substr($donnees['heure'], 0, -3); ?></td>
                     <td style="text-align:center;">
                     <?php
                       $NomBateau = get_bdd()->query("SELECT nom FROM bateau INNER JOIN traversee ON bateau.id_bateau = traversee.id_bateau")->fetch();
                       echo $NomBateau['nom'];
                     ?>
                     </td>
-                    <td style="text-align:center;"><?php echo ""; ?></td>
-                    <td style="text-align:center;"><?php echo ""; ?></td>
-                    <td style="text-align:center;"><?php echo ""; ?></td>
+                    <?php
+                    $a = $donnees['id_bateau'];
+                    $capaciteMaxA = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='A'")->fetch();
+                    $capaciteMaxB = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='B'")->fetch();
+                    $capaciteMaxC = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='C'")->fetch();
+                    ?>
+                    <td style="text-align:center;"><?php echo $capaciteMaxA['capaciteMax']; ?></td>
+                    <td style="text-align:center;"><?php echo $capaciteMaxB['capaciteMax']; ?></td>
+                    <td style="text-align:center;"><?php echo $capaciteMaxC['capaciteMax']; ?></td>
 
                   </tr>
 

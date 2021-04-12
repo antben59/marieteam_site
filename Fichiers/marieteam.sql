@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Apr 12, 2021 at 06:58 PM
--- Server version: 5.7.26
--- PHP Version: 7.2.18
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  lun. 12 avr. 2021 à 21:30
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `marieteam`
+-- Base de données :  `marieteam`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bateau`
+-- Structure de la table `bateau`
 --
 
 DROP TABLE IF EXISTS `bateau`;
@@ -38,21 +38,22 @@ CREATE TABLE IF NOT EXISTS `bateau` (
   `equipements` varchar(150) NOT NULL,
   `image` varchar(150) NOT NULL,
   PRIMARY KEY (`id_bateau`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `bateau`
+-- Déchargement des données de la table `bateau`
 --
 
 INSERT INTO `bateau` (`id_bateau`, `nom`, `longueur`, `largeur`, `vitesse`, `equipements`, `image`) VALUES
-(1, 'CASH-A-L\'EAU', '550', '30', '50', '', ''),
-(2, 'ODE MER', '550', '30', '50', '', ''),
-(3, 'TITANIC', '550', '30', '50', '', '');
+(1, 'Kor\' Ant ', '550', '30', '50', '', ''),
+(2, 'Ar Solen', '550', '30', '50', '', ''),
+(3, 'Al\'xi', '550', '30', '50', '', ''),
+(4, 'Luce isle', '550', '30', '50', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorie`
+-- Structure de la table `categorie`
 --
 
 DROP TABLE IF EXISTS `categorie`;
@@ -63,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `categorie`
+-- Déchargement des données de la table `categorie`
 --
 
 INSERT INTO `categorie` (`lettre_categorie`, `libelle`) VALUES
@@ -74,7 +75,7 @@ INSERT INTO `categorie` (`lettre_categorie`, `libelle`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contenir`
+-- Structure de la table `contenir`
 --
 
 DROP TABLE IF EXISTS `contenir`;
@@ -86,10 +87,28 @@ CREATE TABLE IF NOT EXISTS `contenir` (
   KEY `CONTENIR_BATEAU0_FK` (`id_bateau`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `contenir`
+--
+
+INSERT INTO `contenir` (`lettre_categorie`, `id_bateau`, `capaciteMax`) VALUES
+('A', 1, 240),
+('A', 2, 150),
+('A', 3, 100),
+('A', 4, 500),
+('B', 1, 20),
+('B', 2, 30),
+('B', 3, 30),
+('B', 4, 50),
+('C', 1, 5),
+('C', 2, 10),
+('C', 3, 20),
+('C', 4, 25);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `enregistrer`
+-- Structure de la table `enregistrer`
 --
 
 DROP TABLE IF EXISTS `enregistrer`;
@@ -104,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `enregistrer` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `liaison`
+-- Structure de la table `liaison`
 --
 
 DROP TABLE IF EXISTS `liaison`;
@@ -122,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `liaison` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `liaison`
+-- Déchargement des données de la table `liaison`
 --
 
 INSERT INTO `liaison` (`code_liaison`, `nom`, `distance_miles`, `id_secteur`, `port_depart`, `port_arrivee`) VALUES
@@ -132,7 +151,7 @@ INSERT INTO `liaison` (`code_liaison`, `nom`, `distance_miles`, `id_secteur`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `periode`
+-- Structure de la table `periode`
 --
 
 DROP TABLE IF EXISTS `periode`;
@@ -143,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `periode` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `periode`
+-- Déchargement des données de la table `periode`
 --
 
 INSERT INTO `periode` (`dateDeb`, `dateFin`) VALUES
@@ -154,7 +173,7 @@ INSERT INTO `periode` (`dateDeb`, `dateFin`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `port`
+-- Structure de la table `port`
 --
 
 DROP TABLE IF EXISTS `port`;
@@ -165,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `port` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `port`
+-- Déchargement des données de la table `port`
 --
 
 INSERT INTO `port` (`id_port`, `nom`) VALUES
@@ -180,7 +199,7 @@ INSERT INTO `port` (`id_port`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservation`
+-- Structure de la table `reservation`
 --
 
 DROP TABLE IF EXISTS `reservation`;
@@ -198,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `secteur`
+-- Structure de la table `secteur`
 --
 
 DROP TABLE IF EXISTS `secteur`;
@@ -209,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `secteur` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `secteur`
+-- Déchargement des données de la table `secteur`
 --
 
 INSERT INTO `secteur` (`id_secteur`, `nom`) VALUES
@@ -227,7 +246,7 @@ INSERT INTO `secteur` (`id_secteur`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tarifer`
+-- Structure de la table `tarifer`
 --
 
 DROP TABLE IF EXISTS `tarifer`;
@@ -241,17 +260,31 @@ CREATE TABLE IF NOT EXISTS `tarifer` (
   KEY `TARIFER_TYPE1_FK` (`num_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `tarifer`
+--
+
+INSERT INTO `tarifer` (`dateDeb`, `code_liaison`, `num_type`, `tarif`) VALUES
+('2020-09-01', 24, 1, 18),
+('2020-09-01', 24, 2, 11.1),
+('2020-09-01', 24, 3, 5.6),
+('2020-09-01', 24, 4, 86),
+('2020-09-01', 24, 5, 129),
+('2020-09-01', 24, 6, 189),
+('2020-09-01', 24, 7, 205),
+('2020-09-01', 24, 8, 268);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `traversee`
+-- Structure de la table `traversee`
 --
 
 DROP TABLE IF EXISTS `traversee`;
 CREATE TABLE IF NOT EXISTS `traversee` (
   `num_traversee` int(11) NOT NULL,
   `date` date NOT NULL,
-  `heure` datetime NOT NULL,
+  `heure` time NOT NULL,
   `code_liaison` int(11) NOT NULL,
   `id_bateau` int(11) NOT NULL,
   PRIMARY KEY (`num_traversee`),
@@ -259,10 +292,18 @@ CREATE TABLE IF NOT EXISTS `traversee` (
   KEY `TRAVERSEE_BATEAU0_FK` (`id_bateau`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `traversee`
+--
+
+INSERT INTO `traversee` (`num_traversee`, `date`, `heure`, `code_liaison`, `id_bateau`) VALUES
+(541196, '2021-04-14', '09:00:00', 24, 2),
+(541197, '2021-04-14', '10:00:00', 24, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `type`
+-- Structure de la table `type`
 --
 
 DROP TABLE IF EXISTS `type`;
@@ -274,10 +315,24 @@ CREATE TABLE IF NOT EXISTS `type` (
   KEY `TYPE_CATEGORIE_FK` (`lettre_categorie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `type`
+--
+
+INSERT INTO `type` (`num_type`, `libelle`, `lettre_categorie`) VALUES
+(1, 'Adulte', 'A'),
+(2, 'Junior 8 à 18 ans', 'A'),
+(3, 'Enfant 0 à 7 ans', 'A'),
+(4, 'Voiture long.inf.4m', 'B'),
+(5, 'Voiture long.inf.5m', 'B'),
+(6, 'Fourgon', 'C'),
+(7, 'Camping Car', 'C'),
+(8, 'Camion', 'C');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateurs`
+-- Structure de la table `utilisateurs`
 --
 
 DROP TABLE IF EXISTS `utilisateurs`;
@@ -292,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `utilisateurs`
+-- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `mail`, `mot_de_passe`, `grade`) VALUES
@@ -300,24 +355,24 @@ INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `mail`, `mot_de_passe`, `grad
 (4, 'Decool', 'Dylan', 'dylan.decool14@gmail.com', '123', 0);
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `contenir`
+-- Contraintes pour la table `contenir`
 --
 ALTER TABLE `contenir`
   ADD CONSTRAINT `CONTENIR_BATEAU0_FK` FOREIGN KEY (`id_bateau`) REFERENCES `bateau` (`id_bateau`),
   ADD CONSTRAINT `CONTENIR_CATEGORIE_FK` FOREIGN KEY (`lettre_categorie`) REFERENCES `categorie` (`lettre_categorie`);
 
 --
--- Constraints for table `enregistrer`
+-- Contraintes pour la table `enregistrer`
 --
 ALTER TABLE `enregistrer`
   ADD CONSTRAINT `ENREGISTRER_RESERVATION0_FK` FOREIGN KEY (`num_reservation`) REFERENCES `reservation` (`num_reservation`);
 
 --
--- Constraints for table `liaison`
+-- Contraintes pour la table `liaison`
 --
 ALTER TABLE `liaison`
   ADD CONSTRAINT `LIAISON_PORT0_FK` FOREIGN KEY (`port_depart`) REFERENCES `port` (`id_port`),
@@ -325,13 +380,13 @@ ALTER TABLE `liaison`
   ADD CONSTRAINT `LIAISON_SECTEUR_FK` FOREIGN KEY (`id_secteur`) REFERENCES `secteur` (`id_secteur`);
 
 --
--- Constraints for table `reservation`
+-- Contraintes pour la table `reservation`
 --
 ALTER TABLE `reservation`
   ADD CONSTRAINT `RESERVATION_TRAVERSEE_FK` FOREIGN KEY (`num_traversee`) REFERENCES `traversee` (`num_traversee`);
 
 --
--- Constraints for table `tarifer`
+-- Contraintes pour la table `tarifer`
 --
 ALTER TABLE `tarifer`
   ADD CONSTRAINT `TARIFER_LIAISON0_FK` FOREIGN KEY (`code_liaison`) REFERENCES `liaison` (`code_liaison`),
@@ -339,14 +394,14 @@ ALTER TABLE `tarifer`
   ADD CONSTRAINT `TARIFER_TYPE1_FK` FOREIGN KEY (`num_type`) REFERENCES `type` (`num_type`);
 
 --
--- Constraints for table `traversee`
+-- Contraintes pour la table `traversee`
 --
 ALTER TABLE `traversee`
   ADD CONSTRAINT `TRAVERSEE_BATEAU0_FK` FOREIGN KEY (`id_bateau`) REFERENCES `bateau` (`id_bateau`),
   ADD CONSTRAINT `TRAVERSEE_LIAISON_FK` FOREIGN KEY (`code_liaison`) REFERENCES `liaison` (`code_liaison`);
 
 --
--- Constraints for table `type`
+-- Contraintes pour la table `type`
 --
 ALTER TABLE `type`
   ADD CONSTRAINT `TYPE_CATEGORIE_FK` FOREIGN KEY (`lettre_categorie`) REFERENCES `categorie` (`lettre_categorie`);
