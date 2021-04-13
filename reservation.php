@@ -60,10 +60,14 @@
                  <li class="nav-item">
                 <a class="nav-link" href="mes-reservations.php">Mes réservations</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="admin/index.php">Administration</a>
-              </li>
-              <li class="nav-item">
+              <?php if($_SESSION['grade_utilisateur'] == 1){
+                ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="admin/index.php">Administration</a>
+                </li>
+                <?php
+
+              } ?>v-item">
                 <a class="nav-link" href="deconnexion.php">Déconnexion</a>
               </li>
               <?php }else{ ?>

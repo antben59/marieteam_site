@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once('db_connect.php'); 
+require_once('db_connect.php');
+
 $id_utilisateur = $_SESSION['id_utilisateur'];
   if (!isset($_SESSION["id_utilisateur"])) {
     header("Location: index.php");
@@ -72,9 +73,15 @@ $id_utilisateur = $_SESSION['id_utilisateur'];
                  <li class="nav-item">
                 <a class="nav-link" href="mes-reservations.php">Mes réservations</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="admin/index.php">Administration</a>
-              </li>
+              <?php if($_SESSION['grade_utilisateur'] == 1){
+                ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="admin/index.php">Administration</a>
+                </li>
+                <?php
+
+              } ?>
+
               <li class="nav-item">
                 <a class="nav-link" href="deconnexion.php">Déconnexion</a>
               </li>
