@@ -137,6 +137,16 @@ require_once('db_connect.php')
   $NomLiaison = get_bdd()->query("SELECT nom FROM liaison WHERE code_liaison='$liaison'")->fetch();
   ?>
   <p style="font-size: 20px;text-align:center;">Vous avez choisi la liason : <span style="font-weight:bold;"><?php echo $NomLiaison['nom'] ; ?></span>, du secteur : <span style="font-weight:bold;"><?php echo $nomSecteur['nom'] ; ?></span>  pour la date du : <span style="font-weight:bold;"><?php echo $dateFormat; ?></span>.</p>
+<?php
+                  $nbOccurrence = get_bdd()->query("SELECT count(*) FROM traversee where code_liaison='$liaison' && date='$date'")->fetch();
+                  if($nbOccurrence['0'] == 0){
+                  ?>
+                  <p style="font-size: 20px;text-align:center;">Aucune traversée n'est prévu</p>
+                  <?php
+                  }else{
+
+?>
+  <p style="font-size: 20px;text-align:center;">La liste des traversées disponibles pour cette date :</p>
   <table class="table table-bordered" style="margin-top:20px;">
                   <thead>
                     <tr>
@@ -153,7 +163,7 @@ require_once('db_connect.php')
                       <td style="text-align:center;">B Véh.inf.2m</td>
                       <td style="text-align:center;">B Véh.sup.2m</td>
                   </tr>
-
+<form action="reservation.php" method="POST">
                   <?php
                   $req = get_bdd()->query("SELECT * FROM traversee where code_liaison='$liaison' && date='$date'");
                   while ($donnees = $req->fetch()){
@@ -176,6 +186,7 @@ require_once('db_connect.php')
                     <td style="text-align:center;"><?php echo $capaciteMaxA['capaciteMax']; ?></td>
                     <td style="text-align:center;"><?php echo $capaciteMaxB['capaciteMax']; ?></td>
                     <td style="text-align:center;"><?php echo $capaciteMaxC['capaciteMax']; ?></td>
+                    <td style="text-align:center;"><input type="radio" value="1" name="choix"></td>
 
                   </tr>
 
@@ -184,8 +195,14 @@ require_once('db_connect.php')
                   ?>
                   </tbody>
                 </table>
+                                 <div class="text-center">
+                    <input type="submit" style="text-align:center;margin : 20px 0 40px 0;" class="btn btn-primary" name="envoyer" value="Réserver cette traversée"></input>
+                  </div>
+                  </form>
 <?php
+}
 } ?>
+
 </div>
 </div>
 </section>
