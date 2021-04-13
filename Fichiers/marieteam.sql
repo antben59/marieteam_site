@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 12 avr. 2021 à 21:30
+-- Généré le :  mar. 13 avr. 2021 à 11:46
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -205,14 +205,26 @@ INSERT INTO `port` (`id_port`, `nom`) VALUES
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE IF NOT EXISTS `reservation` (
   `num_reservation` int(11) NOT NULL,
-  `nom` varchar(80) NOT NULL,
-  `adr` varchar(80) NOT NULL,
-  `cp` int(11) NOT NULL,
-  `ville` varchar(80) NOT NULL,
   `num_traversee` int(11) NOT NULL,
+  `id_utilisateurs` int(11) NOT NULL,
   PRIMARY KEY (`num_reservation`),
-  KEY `RESERVATION_TRAVERSEE_FK` (`num_traversee`)
+  KEY `RESERVATION_TRAVERSEE_FK` (`num_traversee`),
+  KEY `id_utilisateurs` (`id_utilisateurs`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `reservation`
+--
+
+INSERT INTO `reservation` (`num_reservation`, `num_traversee`, `id_utilisateurs`) VALUES
+(545, 541196, 4),
+(546, 541197, 4),
+(547, 541196, 4),
+(548, 541196, 4),
+(549, 541196, 4),
+(550, 541196, 4),
+(551, 541196, 4),
+(552, 541197, 4);
 
 -- --------------------------------------------------------
 
@@ -344,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `mot_de_passe` varchar(250) NOT NULL,
   `grade` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateurs`
@@ -352,7 +364,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `mail`, `mot_de_passe`, `grade`) VALUES
 (1, 'bjugtgtt', 'gtgtg', 'rffrfr@gmail.com', 'a', 0),
-(4, 'Decool', 'Dylan', 'dylan.decool14@gmail.com', '123', 0);
+(4, 'decool', 'dylan', 'dylan.decool14@gmail.com', '123', 0);
 
 --
 -- Contraintes pour les tables déchargées
@@ -383,7 +395,8 @@ ALTER TABLE `liaison`
 -- Contraintes pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `RESERVATION_TRAVERSEE_FK` FOREIGN KEY (`num_traversee`) REFERENCES `traversee` (`num_traversee`);
+  ADD CONSTRAINT `RESERVATION_TRAVERSEE_FK` FOREIGN KEY (`num_traversee`) REFERENCES `traversee` (`num_traversee`),
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`id_utilisateurs`) REFERENCES `utilisateurs` (`id`);
 
 --
 -- Contraintes pour la table `tarifer`

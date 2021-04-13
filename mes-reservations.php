@@ -121,7 +121,7 @@ $id_utilisateur = $_SESSION['id_utilisateur'];
           </tr>
         </thead>
     <tbody>
-    <?php 
+    <?php
 
 
      $req = get_bdd()->query('SELECT * FROM reservation where	id_utilisateurs='.$id_utilisateur.' ORDER BY num_reservation DESC LIMIT '.$depart.','.$reservationParPage);
@@ -160,6 +160,9 @@ $id_utilisateur = $_SESSION['id_utilisateur'];
          }
       }
       ?>
+                <p>Merci de l'intêret que vous porter à la compagnie Marieteam.</p>
+                <p>En récompense tout les 5 réservations vous revez automatiquement part mail un bon de réduction de 20% utilisable sur votre prochaine réservation.</p>
+
           </div>
         </div>
       </div>
