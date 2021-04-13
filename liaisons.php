@@ -186,7 +186,13 @@ require_once('db_connect.php')
                     <td style="text-align:center;"><?php echo $capaciteMaxA['capaciteMax']; ?></td>
                     <td style="text-align:center;"><?php echo $capaciteMaxB['capaciteMax']; ?></td>
                     <td style="text-align:center;"><?php echo $capaciteMaxC['capaciteMax']; ?></td>
+                    <?php
+                    if (!empty($_SESSION['id_utilisateur'])){
+?>
                     <td style="text-align:center;"><input type="radio" value="1" name="choix"></td>
+<?php
+                    }
+                    ?>
 
                   </tr>
 
@@ -195,9 +201,19 @@ require_once('db_connect.php')
                   ?>
                   </tbody>
                 </table>
-                                 <div class="text-center">
+                <?php
+                if (empty($_SESSION['id_utilisateur'])) {
+                  ?>
+                  <p style="font-size: 20px;text-align:center;">Pour réserver une traversée vous devez être connecté</p>
+
+                  <?php
+                }else{?> 
+                  <div class="text-center">
                     <input type="submit" style="text-align:center;margin : 20px 0 40px 0;" class="btn btn-primary" name="envoyer" value="Réserver cette traversée"></input>
-                  </div>
+                  </div><?php
+                }
+                ?>
+
                   </form>
 <?php
 }
