@@ -54,7 +54,7 @@ require_once('db_connect.php'); ?>
                 <a class="nav-link" href="mes-reservations.php">Mes réservations</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/index.php">Panel d'administration</a>
+                <a class="nav-link" href="admin/index.php">Administration</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="deconnexion.php">Déconnexion</a>
