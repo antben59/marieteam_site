@@ -1,11 +1,23 @@
 <?php
 session_start();
 require_once('db_connect.php'); 
-
+$id_utilisateur = $_SESSION['id_utilisateur'];
   if (!isset($_SESSION["id_utilisateur"])) {
     header("Location: index.php");
   }
 
+  $reservationParPage = 5;
+  $id_session = $id_utilisateur;
+  $reservationTotalesReq = get_bdd()->query("SELECT num_reservation FROM reservation WHERE id_utilisateurs='$id_session'");
+  $reservationTotales = $reservationTotalesReq->rowCount();
+  $pagesTotales = ceil($reservationTotales/$reservationParPage);
+  if(isset($_GET['page']) AND !empty($_GET['page']) AND $_GET['page'] > 0 AND $_GET['page'] <= $pagesTotales) {
+     $_GET['page'] = intval($_GET['page']);
+     $pageCourante = $_GET['page'];
+  } else {
+     $pageCourante = 1;
+  }
+  $depart = ($pageCourante-1)*$reservationParPage;
 
 ?>
    <!-- header -->
@@ -96,28 +108,58 @@ require_once('db_connect.php');
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1>dedeed</h1><br>
+            <h1>Récapitulatif</h1><br>
           <table class="table table-bordered">
         <thead>
           <tr>
             <th scope="col">Nom Prénom</th>
-            <th scope="col">Prestation</th>
-            <th scope="col">Date et heure</th>
-            <th scope="col">Commentaire</th>
+            <th scope="col">Réservation</th>
+            <th scope="col">Traversée</th>
+            <th scope="col">Bateau</th>
+            <th scope="col">Date</th>
             <th scope="col">Etat</th>
           </tr>
         </thead>
     <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
+    <?php 
 
+
+     $req = get_bdd()->query('SELECT * FROM reservation where	id_utilisateurs='.$id_utilisateur.' ORDER BY num_reservation DESC LIMIT '.$depart.','.$reservationParPage);
+      while ($donnees = $req->fetch()){
+    ?>
+      <tr>
+      <?php
+      $infosUtilisateurReservation = get_bdd()->query("SELECT nom, prenom FROM utilisateurs WHERE id='$id_utilisateur'")->fetch();
+      $num_traversee = $donnees['num_traversee'];
+      $infosBateau = get_bdd()->query("SELECT id_bateau, date, heure FROM traversee WHERE num_traversee='$num_traversee'")->fetch();
+      $id_bateau = $infosBateau[0];
+      $date_traversee = $infosBateau[1];
+      $heure_traversee = $infosBateau[2];
+
+      $infosNomBateau = get_bdd()->query("SELECT nom FROM bateau WHERE id_bateau='$id_bateau'")->fetch();
+     
+      
+      ?>
+        <td><?php echo ucwords($infosUtilisateurReservation['nom']." ".$infosUtilisateurReservation['prenom']); ?></td>
+        <td><?php echo $donnees['num_reservation']; ?></td>
+        <td><?php echo $num_traversee; ?></td>
+
+        <td><?php echo $infosNomBateau['nom']; ?></td>
+        <td><?php echo $date_traversee." à ".substr($heure_traversee, 0, -3); ?></td>
+        <td>Valider</td>
+      </tr>
+<?php } ?>
     </tbody>
   </table>
+  <?php
+      for($i=1;$i<=$pagesTotales;$i++) {
+         if($i == $pageCourante) {
+            echo $i.' ';
+         } else {
+            echo '<a href="mes-reservations.php?page='.$i.'">'.$i.'</a> ';
+         }
+      }
+      ?>
           </div>
         </div>
       </div>

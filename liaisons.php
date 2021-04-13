@@ -136,7 +136,7 @@ require_once('db_connect.php')
   $nomSecteur = get_bdd()->query("SELECT nom FROM secteur WHERE id_secteur='$secteur'")->fetch();
   $NomLiaison = get_bdd()->query("SELECT nom FROM liaison WHERE code_liaison='$liaison'")->fetch();
   ?>
-  <p style="font-size: 20px;text-align:center;">Vous avez choisi la liason : <span style="font-weight:bold;"><?php echo $NomLiaison['nom'] ; ?></span>, du secteur : <span style="font-weight:bold;"><?php echo $nomSecteur['nom'] ; ?></span>  pour la date du : <span style="font-weight:bold;"><?php echo $dateFormat; ?></span>.</p>
+  <p style="font-size: 20px;text-align:center;">Vous avez choisi la liason : <span style="font-weight:bold;"><?php echo $NomLiaison['nom']; ?></span>, du secteur : <span style="font-weight:bold;"><?php echo $nomSecteur['nom'] ; ?></span>  pour la date du : <span style="font-weight:bold;"><?php echo $dateFormat; ?></span>.</p>
 <?php
                   $nbOccurrence = get_bdd()->query("SELECT count(*) FROM traversee where code_liaison='$liaison' && date='$date'")->fetch();
                   if($nbOccurrence['0'] == 0){
@@ -146,7 +146,7 @@ require_once('db_connect.php')
                   }else{
 
 ?>
-  <p style="font-size: 20px;text-align:center;">La liste des traversées disponibles pour cette date :</p>
+  <p style="font-size: 20px;text-align:center;">La liste des traversées disponibles :</p>
   <table class="table table-bordered" style="margin-top:20px;">
                   <thead>
                     <tr>
@@ -189,7 +189,7 @@ require_once('db_connect.php')
                     <?php
                     if (!empty($_SESSION['id_utilisateur'])){
 ?>
-                    <td style="text-align:center;"><input type="radio" value="1" name="choix"></td>
+                    <td style="text-align:center;"><input type="radio" value="<?php echo $NomLiaison['nom'].";".$donnees['num_traversee'].";".$dateFormat.";". substr($donnees['heure'], 0, -3); ?>" name="choix"></td>
 <?php
                     }
                     ?>
@@ -204,7 +204,7 @@ require_once('db_connect.php')
                 <?php
                 if (empty($_SESSION['id_utilisateur'])) {
                   ?>
-                  <p style="font-size: 20px;text-align:center;">Pour réserver une traversée vous devez être connecté</p>
+                  <p style="font-size: 20px;text-align:center;">Pour réserver une traversée vous devez être inscrit et connecter.</p>
 
                   <?php
                 }else{?> 

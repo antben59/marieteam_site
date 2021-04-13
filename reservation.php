@@ -6,11 +6,8 @@
         $infosUtilisateur = get_bdd()->query("SELECT * FROM utilisateurs where id='$id_utilisateur'")->fetch();
 
         if(isset($_POST['choix'])){
-          echo $_POST['choix'];
-        }else{
-          header('location:liaisons.php');
-        }
-    ?>
+          $infosReservation = preg_split("/;/", $_POST['choix']);
+          ?>
     <!-- header -->
     <!doctype html>
 <html lang="fr">
@@ -98,8 +95,8 @@
     <section class="section">
       <div class="container">
       <div class="text-center" style="margin-bottom:30px;">
-          <h4>Liaison : Quiberon- Le Palais</h4>
-          <h5> Traversée n°2585 le 12/11/2020</h5>
+          <h4>Liaison : <?php echo $infosReservation[0]; ?></h4>
+          <h5> Traversée n°<?php echo $infosReservation[1]." le ".$infosReservation[2]. " à ".$infosReservation[3]; ?></h5>
       </div>
 
           <div class="col-md-12">
@@ -294,3 +291,10 @@
     <script src="js/main.js"></script>
   </body>
 </html>
+
+
+          <?php
+        }else{
+          header('location:liaisons.php');
+        }
+    ?>
