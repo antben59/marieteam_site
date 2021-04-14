@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                    <a class="nav-link" style="color:white;" href="tables.php">
+                    <a class="nav-link" style="color:white;" href="../index.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-arrow-left"></i> Retourner sur le site</div>
                                 
                             </a>

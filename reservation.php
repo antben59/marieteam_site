@@ -7,6 +7,27 @@
 
         if(isset($_POST['choix'])){
           $infosReservation = preg_split("/;/", $_POST['choix']);
+
+          function date_verif($d1)
+{
+            setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+
+            $req = get_bdd()->query("SELECT dateFin FROM periode");
+            while ($donnees = $req->fetch()){
+
+                $tmstp1 = strtotime($d1);
+                $tmstp2 = strtotime($donnees['dateFin']);
+                
+                $dfr1 = strftime('%Y-%m-%d', $tmstp1);
+                $dfr2 = strftime('%Y-%m-%d', $tmstp2);
+                
+                if($tmstp1 <= $tmstp2){
+  $DateDeb = get_bdd()->query("SELECT dateDeb FROM periode WHERE dateFin='$dfr2'")->fetch();
+
+                  return $DateDeb[0];
+                }
+            }
+          }
           ?>
     <!-- header -->
     <!doctype html>
@@ -67,7 +88,7 @@
                 </li>
                 <?php
 
-              } ?>v-item">
+              } ?>
                 <a class="nav-link" href="deconnexion.php">Déconnexion</a>
               </li>
               <?php }else{ ?>
@@ -132,6 +153,7 @@
               </div>
               <div class="row">
                 <div class="col-md-10 form-group">
+
                 <table class="table table-bordered" style="margin-top:20px;">
                   <thead>
                     <tr>
@@ -141,9 +163,19 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <?Php
+                  $a = date_verif($infosReservation[4]);
+
+                              $req2 = get_bdd()->query("SELECT * FROM tarifer WHERE dateDeb='$a'");
+                              while ($donnees1 = $req2->fetch()){
+                                //var_dump($donnees1);
+                                $aa = $donnees1['num_type'];
+                                $req3 = get_bdd()->query("SELECT * FROM type WHERE num_type='$aa'")->fetch();
+                                //var_dump($req3);
+?>
                   <tr>
-                      <td>Adulte</td>
-                      <td>20.00</td>
+                      <td><?php echo $req3['libelle']; ?> </td>
+                      <td><?php echo $donnees1['tarif']; ?></td>
                       <td>
                         <select class="form-control" id="exampleFormControlSelect1">
                           <option active>0</option>
@@ -155,104 +187,11 @@
                         </select>
                       </td>
                     </tr>
-                    <tr>
-                      <td>Junior 8 à 18 ans</td>
-                      <td>13.10</td>
-                      <td>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option active>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Enfant 0 à 7 ans</td>
-                      <td>7.00</td>
-                      <td>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option active>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Voiture long.inf.4m</td>
-                      <td>95.00</td>
-                      <td>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option active>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Voiture long.inf.5m</td>
-                      <td>140.00</td>
-                      <td>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option active>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Fourgon</td>
-                      <td>208.00</td>
-                      <td>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option active>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Camping Car</td>
-                      <td>226.00</td>
-                      <td>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option active>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Camion</td>
-                      <td>295.00</td>
-                      <td>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option active>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
-                      </td>
-                    </tr>
+<?php
+                              }
+
+                  ?>
+                  
                   </tbody>
                 </table>
                 </div>

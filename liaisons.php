@@ -194,7 +194,7 @@ require_once('db_connect.php')
                     <?php
                     if (!empty($_SESSION['id_utilisateur'])){
 ?>
-                    <td style="text-align:center;"><input type="radio" value="<?php echo $NomLiaison['nom'].";".$donnees['num_traversee'].";".$dateFormat.";". substr($donnees['heure'], 0, -3); ?>" name="choix"></td>
+                    <td style="text-align:center;"><input type="radio" value="<?php echo $NomLiaison['nom'].";".$donnees['num_traversee'].";".$dateFormat.";". substr($donnees['heure'], 0, -3).";".$date; ?>" name="choix"></td>
 <?php
                     }
                     ?>
