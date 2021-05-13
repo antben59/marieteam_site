@@ -2,23 +2,26 @@
 session_start();
 require_once('db_connect.php');
 
-$id_utilisateur = $_SESSION['id_utilisateur'];
-  if (!isset($_SESSION["id_utilisateur"])) {
-    header("Location: index.php");
-  }
+if (isset($_SESSION["id_utilisateur"])) {
 
+  $id_utilisateur = $_SESSION['id_utilisateur'];
   $reservationParPage = 5;
-  $id_session = $id_utilisateur;
-  $reservationTotalesReq = get_bdd()->query("SELECT num_reservation FROM reservation WHERE id_utilisateurs='$id_session'");
+  $reservationTotalesReq = get_bdd()->query("SELECT num_reservation FROM reservation WHERE id_utilisateurs='$id_utilisateur'");
+  
   $reservationTotales = $reservationTotalesReq->rowCount();
   $pagesTotales = ceil($reservationTotales/$reservationParPage);
+
   if(isset($_GET['page']) AND !empty($_GET['page']) AND $_GET['page'] > 0 AND $_GET['page'] <= $pagesTotales) {
-     $_GET['page'] = intval($_GET['page']);
-     $pageCourante = $_GET['page'];
+      $_GET['page'] = intval($_GET['page']);
+      $pageCourante = $_GET['page'];
   } else {
-     $pageCourante = 1;
+      $pageCourante = 1;
   }
   $depart = ($pageCourante-1)*$reservationParPage;
+}
+else{
+  header("Location: index.php");
+}
 
 ?>
    <!-- header -->
