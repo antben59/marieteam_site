@@ -6,8 +6,9 @@ if (isset($_SESSION["id_utilisateur"])) {
 
   $id_utilisateur = $_SESSION['id_utilisateur'];
   $reservationParPage = 5;
-  $reservationTotalesReq = get_bdd()->query("SELECT num_reservation FROM reservation WHERE id_utilisateurs='$id_utilisateur'");
-  
+  $reservationTotalesReq = get_bdd()->prepare("SELECT num_reservation FROM reservation WHERE id_utilisateurs='$id_utilisateur'");
+  $reservationTotalesReq->execute();
+
   $reservationTotales = $reservationTotalesReq->rowCount();
   $pagesTotales = ceil($reservationTotales/$reservationParPage);
 
