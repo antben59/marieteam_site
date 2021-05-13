@@ -77,15 +77,17 @@ else{
                  <li class="nav-item">
                 <a class="nav-link" href="mes-reservations.php">Mes réservations</a>
               </li>
-              <?php if($_SESSION['grade_utilisateur'] == 1){
-                ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="admin/index.php">Administration</a>
-                </li>
-                <?php
 
-              } ?>
-
+              <?php if(isset($_SESSION['grade_utilisateur'])){
+                if($_SESSION['grade_utilisateur'] == 1){
+                  ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="admin/index.php">Administration</a>
+                  </li>
+                  <?php
+                }
+              }
+ ?>
               <li class="nav-item">
                 <a class="nav-link" href="deconnexion.php">Déconnexion</a>
               </li>
@@ -171,8 +173,8 @@ else{
          }
       }
       ?>
-                <p>Merci de l'intêret que vous porter à la compagnie Marieteam.</p>
-                <p>En récompense tout les 5 réservations vous revez automatiquement part mail un bon de réduction de 20% utilisable sur votre prochaine réservation.</p>
+            <p>Merci de l'intêret que vous porter à la compagnie Marieteam.</p>
+            <p>En récompense tout les 5 réservations vous revez automatiquement part mail un bon de réduction de 20% utilisable sur votre prochaine réservation.</p>
 
           </div>
         </div>
