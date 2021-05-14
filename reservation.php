@@ -59,25 +59,25 @@
               <div class="row">
                 <div class="col-md-5 form-group">
                   <label for="fname">Nom</label>
-                  <input type="text" class="form-control form-control-lg" id="fname" placeholder="<?php echo $infosUtilisateur['nom'] ?>">
+                  <h5><?php echo ucwords($infosUtilisateur['prenom']); ?></h5>
                 </div>
                 <div class="col-md-5 form-group">
                   <label for="lname">Prénom</label>
-                  <input type="text" class="form-control form-control-lg" id="lname" placeholder="<?php echo $infosUtilisateur['prenom'] ?>">
+                  <h5><?php echo ucwords($infosUtilisateur['nom']); ?></h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4 form-group">
                   <label for="adresse">Adresse</label>
-                  <input type="text" id="adresse" class="form-control form-control-lg">
+                  <h5><?php echo ucwords($infosUtilisateur['adresse']); ?></h5>
                 </div>
                 <div class="col-md-3 form-group">
                   <label for="adresse">Code postale</label>
-                  <input type="text" id="adresse" class="form-control form-control-lg">
+                  <h5><?php echo ucwords($infosUtilisateur['code_postal']); ?></h5>
                 </div>
                 <div class="col-md-3 form-group">
                   <label for="adresse">Ville</label>
-                  <input type="text" id="adresse" class="form-control form-control-lg">
+                  <h5><?php echo ucwords($infosUtilisateur['ville']); ?></h5>
                 </div>
               </div>
               <div class="row">
