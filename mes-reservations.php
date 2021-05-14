@@ -182,7 +182,7 @@ else{
     </section>
 
     <!-- footer -->
-    <?php include('PhpTools/footer.php');?>
+    <?php include('footer.php');?>
     <!-- footer -->
 
     <!-- loader -->

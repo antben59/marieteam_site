@@ -164,7 +164,7 @@ require_once('db_connect.php');
     </section>
 
     <!-- footer -->
-    <?php include('PhpTools/footer.php');?>
+    <?php include('footer.php');?>
     <!-- footer -->
 
     <!-- loader -->

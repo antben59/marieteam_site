@@ -1,7 +1,5 @@
-<!-- Fonction -->
-<?php include('fonction.php');?>
-<!-- END Fonction -->
-<!doctype html>
+   <!-- header -->
+   <!doctype html>
 <html lang="fr">
   <head>
     <title>MarieTeam</title>
@@ -46,12 +44,32 @@
               <li class="nav-item">
                 <a class="nav-link" href="contact.php">Contact</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="admin.php">Panel d'administration</a>
+              <?php
+                if(isset($_SESSION['id_utilisateur'])){
+                  ?>
+                 <li class="nav-item">
+                <a class="nav-link" href="mes-reservations.php">Mes réservations</a>
               </li>
+              <?php if($_SESSION['grade_utilisateur'] == 1){
+                ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="admin/index.php">Administration</a>
+                </li>
+                <?php
+
+              } ?>
+              <li class="nav-item">
+                <a class="nav-link" href="deconnexion.php">Déconnexion</a>
+              </li>
+              <?php }else{ ?>
+              <li class="nav-item">
+                <a class="nav-link" href="connexion_inscription.php">Connexion / Inscription</a>
+              </li>
+              <?php } ?>
+
+
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    <!-- END header -->
