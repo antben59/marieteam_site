@@ -104,7 +104,8 @@ include('header.php');
                     <td style="text-align:center;"><?php echo substr($donnees['heure'], 0, -3); ?></td>
                     <td style="text-align:center;">
                     <?php
-                      $NomBateau = get_bdd()->query("SELECT nom FROM bateau INNER JOIN traversee ON bateau.id_bateau = traversee.id_bateau")->fetch();
+                    $num_traversee = $donnees['num_traversee'];
+                      $NomBateau = get_bdd()->query('SELECT nom FROM bateau INNER JOIN traversee ON bateau.id_bateau = traversee.id_bateau WHERE num_traversee="'.$num_traversee.'"')->fetch();
                       echo $NomBateau['nom'];
                     ?>
                     </td>

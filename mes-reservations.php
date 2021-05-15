@@ -2,9 +2,11 @@
 session_start();
 require_once('db_connect.php');
 
+
 if (isset($_SESSION["id_utilisateur"])) {
 
   $id_utilisateur = $_SESSION['id_utilisateur'];
+  $infosUtilisateur = get_bdd()->query("SELECT count(num_reservation) FROM reservation where id_utilisateurs='$id_utilisateur'")->fetch();
   $reservationParPage = 5;
   $reservationTotalesReq = get_bdd()->prepare("SELECT num_reservation FROM reservation WHERE id_utilisateurs='$id_utilisateur'");
   $reservationTotalesReq->execute();
@@ -122,6 +124,7 @@ else{
         <div class="row">
           <div class="col-md-12">
             <h1>Récapitulatif</h1><br>
+            <h3>Vous avez effectués au total <?php echo $infosUtilisateur[0]; ?> réservations.</h3>
           <table class="table table-bordered">
         <thead>
           <tr>
@@ -164,7 +167,9 @@ else{
 <?php } ?>
     </tbody>
   </table>
-  <?php
+  <div style="     margin: 0 auto;
+     width: 100px;">
+    <?php
       for($i=1;$i<=$pagesTotales;$i++) {
          if($i == $pageCourante) {
             echo $i.' ';
@@ -173,6 +178,8 @@ else{
          }
       }
       ?>
+  </div>
+
             <p>Merci de l'intêret que vous porter à la compagnie Marieteam.</p>
             <p>En récompense tout les 5 réservations vous revez automatiquement part mail un bon de réduction de 20% utilisable sur votre prochaine réservation.</p>
 

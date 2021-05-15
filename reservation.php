@@ -22,14 +22,14 @@
                 $dfr2 = strftime('%Y-%m-%d', $tmstp2);
                 
                 if($tmstp1 <= $tmstp2){
-  $DateDeb = get_bdd()->query("SELECT dateDeb FROM periode WHERE dateFin='$dfr2'")->fetch();
+                $DateDeb = get_bdd()->query("SELECT dateDeb FROM periode WHERE dateFin='$dfr2'")->fetch();
 
                   return $DateDeb[0];
                 }
             }
           }
-      
           include('header.php');
+
           ?>
     <!-- header -->
     <section class="inner-page">
@@ -55,7 +55,10 @@
 
           <div class="col-md-12">
           <h5>Saisir les informations relatives à la réservation</h5>
-            <form action="#" method="post">
+            <form action="ajouter-reservation.php" method="POST">
+            <input type="hidden" value="<?php echo $infosReservation[1]; ?>" name="num_traversee">
+            <input type="hidden" value="<?php echo $id_utilisateur; ?>" name="id_utilisateurs">
+            <input type="hidden" value="<?php echo "0"; ?>" name="quantite">
               <div class="row">
                 <div class="col-md-5 form-group">
                   <label for="fname">Nom</label>
@@ -106,7 +109,7 @@
                       <td><?php echo $req3['libelle']; ?> </td>
                       <td><?php echo $donnees1['tarif']; ?></td>
                       <td>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select class="form-control" id="" name="<?php echo $req3['libelle']; ?>">
                           <option active>0</option>
                           <option>1</option>
                           <option>2</option>
@@ -127,7 +130,7 @@
               </div>
               <div class="row">
                 <div class="col-md-4 form-group">
-                  <input type="submit" value="Enregistrer la réservation" class="btn btn-primary btn-lg btn-block">
+                <button type="submit" name="reserver" class="btn btn-primary btn-lg btn-block">Enregistrer la réservation</button>
                 </div>
               </div>
             </form>
@@ -167,6 +170,6 @@
 
           <?php
         }else{
-          header('location:liaisons.php');
+          //header('location:liaisons.php');
         }
     ?>
