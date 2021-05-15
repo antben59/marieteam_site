@@ -114,6 +114,12 @@ include('header.php');
                     $capaciteMaxA = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='A'")->fetch();
                     $capaciteMaxB = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='B'")->fetch();
                     $capaciteMaxC = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='C'")->fetch();
+
+                    $placeReserveA = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='A'")->fetch();
+
+                    $placeReserveB = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='B'")->fetch();
+
+                    $placeReserveC = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='C'")->fetch();
                     ?>
                     <td style="text-align:center;"><?php echo $capaciteMaxA['capaciteMax']; ?></td>
                     <td style="text-align:center;"><?php echo $capaciteMaxB['capaciteMax']; ?></td>

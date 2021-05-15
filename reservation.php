@@ -24,7 +24,7 @@
                 if($tmstp1 <= $tmstp2){
                 $DateDeb = get_bdd()->query("SELECT dateDeb FROM periode WHERE dateFin='$dfr2'")->fetch();
 
-                  return $DateDeb[0];
+                return $DateDeb[0];
                 }
             }
           }
@@ -109,7 +109,7 @@
                       <td><?php echo $req3['libelle']; ?> </td>
                       <td><?php echo $donnees1['tarif']; ?></td>
                       <td>
-                        <select class="form-control" id="" name="<?php echo $req3['libelle']; ?>">
+                        <select class="form-control" id="" name="<?php echo $req3['num_type']; ?>">
                           <option active>0</option>
                           <option>1</option>
                           <option>2</option>
@@ -121,7 +121,6 @@
                     </tr>
 <?php
                               }
-
                   ?>
                   
                   </tbody>
