@@ -130,15 +130,29 @@ if(isset($_POST['connexion'])){
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-12 form-group">
+                <div class="col-md-6 form-group">
                   <label for="email">Email</label>
                   <input type="email" id="email" class="form-control form-control-lg" name="mail" required>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 form-group">
+                <div class="col-md-6 form-group">
                   <label for="nom">Mot de passe</label>
                   <input type="password" class="form-control form-control-lg" id="nom" name="mot_de_passe" required>
+                </div>
+              </div>
+              <div class="row">
+              <div class="col-md-12 form-group">
+                  <label for="adresse">Adresse</label>
+                  <input type="text" class="form-control form-control-lg" id="adresse" name="adresse" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="code_postal">Code Postal</label>
+                  <input type="text" class="form-control form-control-lg" id="code_postal" name="code_postal" required>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="ville">Ville</label>
+                  <input type="text" class="form-control form-control-lg" id="ville" name="ville" required>
                 </div>
               </div>
               <div class="row">
@@ -179,7 +193,7 @@ if(isset($_POST['connexion'])){
     </section>
 
     <!-- footer -->
-    <?php include('PhpTools/footer.php');?>
+    <?php include('footer.php');?>
     <!-- footer -->
 
     <!-- loader -->
@@ -205,9 +219,15 @@ if(isset($_POST['inscription'])){
       && !empty($_POST['prenom'])
       && !empty($_POST['mail'])
       && !empty($_POST['mot_de_passe'])
+      && !empty($_POST['adresse'])
+      && !empty($_POST['code_postal'])
+      && !empty($_POST['ville'])
   ){
       $nom = htmlspecialchars($_POST['nom'], ENT_QUOTES);
       $prenom = htmlspecialchars($_POST['prenom'], ENT_QUOTES);
+      $adresse = htmlspecialchars($_POST['adresse'], ENT_QUOTES);
+      $code_postal = htmlspecialchars($_POST['code_postal'], ENT_QUOTES);
+      $ville = htmlspecialchars($_POST['ville'], ENT_QUOTES);
       $mail = htmlspecialchars(strtolower($_POST['mail']), ENT_QUOTES);
       $mot_de_passe = htmlspecialchars($_POST['mot_de_passe'], ENT_QUOTES);
 
@@ -220,6 +240,9 @@ if(isset($_POST['inscription'])){
                       prenom,
                       mail,
                       mot_de_passe,
+                      adresse,
+                      code_postal,
+                      ville,
                       grade
                       )
                       values (
@@ -228,6 +251,9 @@ if(isset($_POST['inscription'])){
                       '$prenom',
                       '$mail',
                       '$mot_de_passe',
+                      '$adresse',
+                      '$code_postal',
+                      '$ville',
                       '0'
                       )";
 

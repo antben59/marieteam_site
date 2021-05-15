@@ -123,8 +123,9 @@ else{
       <div class="container">
         <div class="row">
           <div class="col-md-12">
+          <?php if($infosUtilisateur[0]>0){ ?>
             <h1>Récapitulatif</h1><br>
-            <h3>Vous avez effectués au total <?php echo $infosUtilisateur[0]; ?> réservations.</h3>
+            <h3>Vous avez effectué au total <?php echo $infosUtilisateur[0]; ?> réservations.</h3>
           <table class="table table-bordered">
         <thead>
           <tr>
@@ -136,53 +137,58 @@ else{
             <th scope="col">Etat</th>
           </tr>
         </thead>
-    <tbody>
-    <?php
+            <tbody>
+            <?php
 
 
-     $req = get_bdd()->query('SELECT * FROM reservation where	id_utilisateurs='.$id_utilisateur.' ORDER BY num_reservation DESC LIMIT '.$depart.','.$reservationParPage);
-      while ($donnees = $req->fetch()){
-    ?>
-      <tr>
-      <?php
-      $infosUtilisateurReservation = get_bdd()->query("SELECT nom, prenom FROM utilisateurs WHERE id='$id_utilisateur'")->fetch();
-      $num_traversee = $donnees['num_traversee'];
-      $infosBateau = get_bdd()->query("SELECT id_bateau, date, heure FROM traversee WHERE num_traversee='$num_traversee'")->fetch();
-      $id_bateau = $infosBateau[0];
-      $date_traversee = $infosBateau[1];
-      $heure_traversee = $infosBateau[2];
+            $req = get_bdd()->query('SELECT * FROM reservation where	id_utilisateurs='.$id_utilisateur.' ORDER BY num_reservation DESC LIMIT '.$depart.','.$reservationParPage);
+              while ($donnees = $req->fetch()){
+            ?>
+              <tr>
+              <?php
+              $infosUtilisateurReservation = get_bdd()->query("SELECT nom, prenom FROM utilisateurs WHERE id='$id_utilisateur'")->fetch();
+              $num_traversee = $donnees['num_traversee'];
+              $infosBateau = get_bdd()->query("SELECT id_bateau, date, heure FROM traversee WHERE num_traversee='$num_traversee'")->fetch();
+              $id_bateau = $infosBateau[0];
+              $date_traversee = $infosBateau[1];
+              $heure_traversee = $infosBateau[2];
 
-      $infosNomBateau = get_bdd()->query("SELECT nom FROM bateau WHERE id_bateau='$id_bateau'")->fetch();
-     
-      
-      ?>
-        <td><?php echo ucwords($infosUtilisateurReservation['nom']." ".$infosUtilisateurReservation['prenom']); ?></td>
-        <td><?php echo $donnees['num_reservation']; ?></td>
-        <td><?php echo $num_traversee; ?></td>
+              $infosNomBateau = get_bdd()->query("SELECT nom FROM bateau WHERE id_bateau='$id_bateau'")->fetch();
+            
+              
+              ?>
+                <td><?php echo ucwords($infosUtilisateurReservation['nom']." ".$infosUtilisateurReservation['prenom']); ?></td>
+                <td><?php echo $donnees['num_reservation']; ?></td>
+                <td><?php echo $num_traversee; ?></td>
 
-        <td><?php echo $infosNomBateau['nom']; ?></td>
-        <td><?php echo $date_traversee." à ".substr($heure_traversee, 0, -3); ?></td>
-        <td>Valider</td>
-      </tr>
-<?php } ?>
-    </tbody>
-  </table>
-  <div style="     margin: 0 auto;
-     width: 100px;">
-    <?php
-      for($i=1;$i<=$pagesTotales;$i++) {
-         if($i == $pageCourante) {
-            echo $i.' ';
-         } else {
-            echo '<a href="mes-reservations.php?page='.$i.'">'.$i.'</a> ';
-         }
-      }
-      ?>
-  </div>
+                <td><?php echo $infosNomBateau['nom']; ?></td>
+                <td><?php echo $date_traversee." à ".substr($heure_traversee, 0, -3); ?></td>
+                <td>Valider</td>
+              </tr>
+        <?php } ?>
+            </tbody>
+          </table>
+          <div style="     margin: 0 auto;
+            width: 100px;">
+            <?php
+              for($i=1;$i<=$pagesTotales;$i++) {
+                if($i == $pageCourante) {
+                    echo $i.' ';
+                } else {
+                    echo '<a href="mes-reservations.php?page='.$i.'">'.$i.'</a> ';
+                }
+              }
+              ?>
+          </div>
 
             <p>Merci de l'intêret que vous porter à la compagnie Marieteam.</p>
             <p>En récompense tout les 5 réservations vous revez automatiquement part mail un bon de réduction de 20% utilisable sur votre prochaine réservation.</p>
-
+          <?php }else{
+            ?>
+            <h1>Récapitulatif</h1><br>
+            <h3>Vous n'avez pas effectué de réservation.</h3>
+            <?php
+          }?>
           </div>
         </div>
       </div>

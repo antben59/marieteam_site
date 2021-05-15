@@ -97,6 +97,8 @@
                   <tbody>
                   <?Php
                   $a = date_verif($infosReservation[4]);
+          
+                             // $placeReserveAdulte = get_bdd()->query('SELECT libelle, SUM(quantiteAdulte),SUM(quantiteJunior), SUM(quantiteEnfant), SUM(quantiteVoitureInf4m),SUM(quantiteVoitureInf5m),SUM(quantiteFourgon),SUM(quantiteCampingCar),SUM(quantiteCamion) FROM reservation WHERE num_traversee="'.$infosReservation[1].'"')->fetch();
 
                               $req2 = get_bdd()->query("SELECT * FROM tarifer WHERE dateDeb='$a'");
                               while ($donnees1 = $req2->fetch()){
@@ -104,6 +106,8 @@
                                 $aa = $donnees1['num_type'];
                                 $req3 = get_bdd()->query("SELECT * FROM type WHERE num_type='$aa'")->fetch();
                                 //var_dump($req3);
+
+                                
 ?>
                   <tr>
                       <td><?php echo $req3['libelle']; ?> </td>
@@ -111,11 +115,15 @@
                       <td>
                         <select class="form-control" id="" name="<?php echo $req3['num_type']; ?>">
                           <option active>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+                          <?php
+                          for($i = 1;$i <= 50;$i++){
+                            ?>
+                          <option><?php echo $i; ?></option>  
+                          <?php
+                          }
+                          ?>
+                          
+
                         </select>
                       </td>
                     </tr>
@@ -150,7 +158,7 @@
     <!-- END section -->
 
     <!-- footer -->
-    <?php include('PhpTools/footer.php');?>
+    <?php include('footer.php');?>
     <!-- footer -->
 
 

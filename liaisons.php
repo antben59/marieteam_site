@@ -111,19 +111,18 @@ include('header.php');
                     </td>
                     <?php
                     $a = $donnees['id_bateau'];
-                    $capaciteMaxA = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='A'")->fetch();
-                    $capaciteMaxB = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='B'")->fetch();
-                    $capaciteMaxC = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='C'")->fetch();
+                    $capaciteMaxA = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a AND lettre_categorie='A'")->fetch();
+                    $capaciteMaxB = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a AND lettre_categorie='B'")->fetch();
+                    $capaciteMaxC = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a AND lettre_categorie='C'")->fetch();
 
-                    $placeReserveA = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='A'")->fetch();
+                    $placeReserveA = get_bdd()->query('SELECT SUM(quantiteAdulte+quantiteJunior+quantiteEnfant) FROM reservation WHERE num_traversee="'.$num_traversee.'"')->fetch();
+                    $placeReserveB = get_bdd()->query('SELECT SUM(quantiteVoitureInf4m+quantiteVoitureInf5m) FROM reservation WHERE num_traversee="'.$num_traversee.'"')->fetch();
+                    $placeReserveC = get_bdd()->query('SELECT SUM(quantiteFourgon+quantiteCampingCar+quantiteCamion) FROM reservation WHERE num_traversee="'.$num_traversee.'"')->fetch();
 
-                    $placeReserveB = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='B'")->fetch();
-
-                    $placeReserveC = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a && lettre_categorie='C'")->fetch();
                     ?>
-                    <td style="text-align:center;"><?php echo $capaciteMaxA['capaciteMax']; ?></td>
-                    <td style="text-align:center;"><?php echo $capaciteMaxB['capaciteMax']; ?></td>
-                    <td style="text-align:center;"><?php echo $capaciteMaxC['capaciteMax']; ?></td>
+                    <td style="text-align:center;"><?php echo ($capaciteMaxA['capaciteMax']-$placeReserveA[0]); ?></td>
+                    <td style="text-align:center;"><?php echo ($capaciteMaxB['capaciteMax']-$placeReserveB[0]); ?></td>
+                    <td style="text-align:center;"><?php echo ($capaciteMaxC['capaciteMax']-$placeReserveC[0]); ?></td>
                     <?php
                     if (!empty($_SESSION['id_utilisateur'])){
 ?>
