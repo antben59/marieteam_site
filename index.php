@@ -10,24 +10,12 @@ include('header.php');
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center text-center">
             <div class="col-md-7 col-sm-12 element-animate">
-              <h1 class="mb-4">MarieTeam vous transporte en sécurité depuis 20 ans</h1>
-              <p class="mb-0"><a href="reservation.php" target="_blank" class="btn btn-primary">Je réserve</a></p>
-              
+              <h1 class="mb-4">MarieTeam vous transporte en sécurité depuis 20 ans</h1>              
             </div>
           </div>
         </div>
 
       </div>
-
-      <div class="slider-item" style="background-image: url('img/Photo-slider-2.jpg');">
-        <div class="container">
-          <div class="row slider-text align-items-center justify-content-center text-center">
-            <div class="col -md-8 col-sm-12 element-animate">
-              <h1 class="mb-4">Réservez dès maintenant votre traversée !</h1>
-              <p class="mb-0"><a href="reservation.php" target="_blank" class="btn btn-primary">Je réserve</a></p>
-            </div>
-          </div>
-        </div>
         
       </div>
 

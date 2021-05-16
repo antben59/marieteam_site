@@ -62,15 +62,6 @@ include('header.php');
                   <input type="submit" value="Envoyer votre message" class="btn btn-primary btn-lg btn-block">
                 </div>
               </div>
-              <?php
-                    $retour = mail('dylan.decool14@gmail.com', 'fghjk', 'dfghj', 'fghjk');
-                    if($retour) {
-                        echo '<p>Votre message a bien été envoyé.</p>';
-                    }else
-                    {
-                        echo '<p>Une erreur c\'est produite lors de l\'envois de l\'email.</p>';
-                    }
-              ?>
             </form>
           </div>
           <div class="col-md-1"></div>
