@@ -243,6 +243,7 @@ if(isset($_POST['inscription'])){
                       adresse,
                       code_postal,
                       ville,
+                      point_fidelite,
                       grade
                       )
                       values (
@@ -254,6 +255,7 @@ if(isset($_POST['inscription'])){
                       '$adresse',
                       '$code_postal',
                       '$ville',
+                      '0',
                       '0'
                       )";
 

@@ -58,7 +58,7 @@ include('header.php');
               <div class="media-body">
                 <h3 class="mt-0 text-black">Nos traversées</h3>
                 <p>Toutes nos liaisons et traversées en un clic.</p>
-                <p><a href="liaisons.php" class="btn btn-outline-primary btn-sm">En savoir plus</a></p>
+                <p><a href="horaires.php" class="btn btn-outline-primary btn-sm">En savoir plus</a></p>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@ include('header.php');
                 <div class="media-body">
                 <h3 class="mt-0 text-black">Nos horaires</h3>
                 <p>Une plage horaire de toute la semaine.</p>
-                <p><a href="horaires.php" class="btn btn-outline-primary btn-sm">En savoir plus</a></p>
+                <p><a href="liaisons.php" class="btn btn-outline-primary btn-sm">En savoir plus</a></p>
               </div>
             </div>
           </div>
