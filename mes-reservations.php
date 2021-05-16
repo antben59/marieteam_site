@@ -129,9 +129,9 @@ else{
           <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">Nom Prénom</th>
-            <th scope="col">Réservation</th>
-            <th scope="col">Traversée</th>
+            <th scope="col">Informations</th>
+            <th scope="col">Réservation N°</th>
+            <th scope="col">Traversée N°</th>
             <th scope="col">Bateau</th>
             <th scope="col">Date</th>
             <th scope="col">Etat</th>
