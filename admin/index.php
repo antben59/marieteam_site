@@ -8,8 +8,74 @@ if(isset($_SESSION['grade_utilisateur'])){
         include('header.php');
         include('../db_connect.php');
         include('fonctions.php');
-        ?>
+        // ajouter liaison 
+    if(isset($_POST['ajouter_liaison'])){
 
+        $nom_secteur = $_POST['secteur'];
+        $nom_port_depart = $_POST['depart'];
+        $nom_port_arrivee = $_POST['arrivee'];
+
+        $miles = $_POST['miles'];
+        $code_liaison = $_POST['code_liaison'];
+        $id_secteur = getIdSecteur($nom_secteur);
+        $id_port_depart = getIdPort($nom_port_depart);
+        $id_port_arrivee = getIdPort($nom_port_arrivee);
+        $nom_liaison = $nom_port_depart . " " . $nom_port_arrivee;
+
+        $nom_liaison_bdd = get_bdd()->prepare("SELECT * FROM liaison WHERE nom ='$nom_liaison'");
+        $nom_liaison_bdd->execute();
+        $n_liaison = $nom_liaison_bdd->rowCount();
+
+        if($id_port_arrivee != $id_port_depart && $id_port_arrivee > 0 && $id_port_depart > 0 && $n_liaison>0){
+            try{
+                $sql = "INSERT INTO liaison(
+                    code_liaison,
+                    nom,
+                    distance_miles,
+                    id_secteur,
+                    port_depart,
+                    port_arrivee
+                    )
+                    values (
+                    '$code_liaison',
+                    '$nom_liaison',
+                    '$miles',
+                    '$id_secteur',
+                    '$id_port_depart',
+                    '$id_port_arrivee'
+                    )";
+                $req = get_bdd()->prepare($sql);
+                $req->execute();
+            }
+              catch (Exception $e) {
+                  echo 'Exception reçue : ',  $e->getMessage(), "\n";  
+            }
+        }
+        else{
+            echo "<center>Impossible de créer la liaison \n Les ports saisis ne sont pas compatibles</center>";
+        }
+    }
+?>
+    <section class="section">
+        <div class="container">
+    
+        <h2 class="mt-4">Supprimer des liaisons</h2>
+
+    <?php
+    $req = get_bdd()->query("SELECT * FROM liaison");
+    while ($data = $req->fetch()){ 
+        
+        ?><div class="row mb-3">
+        <div class="col-6 themed-grid-col"><?=$data['nom']?></div>
+        <div class="col-6 themed-grid-col"><?=$data['nom']?></div>
+
+        </div><?php
+    }?>
+    </div>
+
+</div>
+    
+    </section>
 
  <section class="section">
       <div class="container">
@@ -76,61 +142,11 @@ if(isset($_SESSION['grade_utilisateur'])){
               </form>
           </div>
 
-          <section class="section">
-          <div class="container">
-          
-          <h2>
-          
-          </h2>
-          </div>
-          
-          </section>
+
       </div>
     </section>
     <?php
-    // ajouter liaison 
-    if(isset($_POST['ajouter_liaison'])){
-
-        $nom_secteur = $_POST['secteur'];
-        $nom_port_depart = $_POST['depart'];
-        $nom_port_arrivee = $_POST['arrivee'];
-
-        $miles = $_POST['miles'];
-        $code_liaison = $_POST['code_liaison'];
-        $id_secteur = getIdSecteur($nom_secteur);
-        $id_port_depart = getIdPort($nom_port_depart);
-        $id_port_arrivee = getIdPort($nom_port_arrivee);
-        $nom_liaison = $nom_port_depart . " " . $nom_port_arrivee;
-        $sucess = true;
-        if($id_port_arrivee != $id_port_depart && $id_port_arrivee > 0 && $id_port_depart > 0){
-            try{
-                $sql = "INSERT INTO liaison(
-                    code_liaison,
-                    nom,
-                    distance_miles,
-                    id_secteur,
-                    port_depart,
-                    port_arrivee
-                    )
-                    values (
-                    '$code_liaison',
-                    '$nom_liaison',
-                    '$miles',
-                    '$id_secteur',
-                    '$id_port_depart',
-                    '$id_port_arrivee'
-                    )";
-                $req = get_bdd()->prepare($sql);
-                $req->execute();
-            }
-              catch (Exception $e) {
-                  echo 'Exception reçue : ',  $e->getMessage(), "\n";  
-            }
-        }
-        else{
-            echo "<center>Les ports saisis ne sont pas appropriés</center>";
-        }
-    }
+    
     
     } else{
         header('location: ../error404.php');
