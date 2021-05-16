@@ -42,7 +42,7 @@
                 <a class="nav-link" href="../liaisons.php">Retour au site</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="deconnexion.php">Déconnexion</a>
+                <a class="nav-link" href="../deconnexion.php">Déconnexion</a>
               </li>
             </ul>
           </div>
