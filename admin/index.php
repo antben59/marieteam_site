@@ -22,11 +22,7 @@ if(isset($_SESSION['grade_utilisateur'])){
         $id_port_arrivee = getIdPort($nom_port_arrivee);
         $nom_liaison = $nom_port_depart . " " . $nom_port_arrivee;
 
-        $nom_liaison_bdd = get_bdd()->prepare("SELECT * FROM liaison WHERE nom ='$nom_liaison'");
-        $nom_liaison_bdd->execute();
-        $n_liaison = $nom_liaison_bdd->rowCount();
-
-        if($id_port_arrivee != $id_port_depart && $id_port_arrivee > 0 && $id_port_depart > 0 && $n_liaison>0){
+        if($id_port_depart != $id_port_arrivee){
             try{
                 $sql = "INSERT INTO liaison(
                     code_liaison,
@@ -55,31 +51,18 @@ if(isset($_SESSION['grade_utilisateur'])){
             echo "<center>Impossible de créer la liaison \n Les ports saisis ne sont pas compatibles</center>";
         }
     }
+
+    if((isset($_GET['delete']))){
+      $id = $_GET['delete'];
+      $req = get_bdd()->prepare("DELETE FROM liaison WHERE code_liaison ='$id'");
+      $sql = $req->execute();
+    }
+
 ?>
-    <section class="section">
-        <div class="container">
-    
-        <h2 class="mt-4">Supprimer des liaisons</h2>
-
-    <?php
-    $req = get_bdd()->query("SELECT * FROM liaison");
-    while ($data = $req->fetch()){ 
-        
-        ?><div class="row mb-3">
-        <div class="col-6 themed-grid-col"><?=$data['nom']?></div>
-        <div class="col-6 themed-grid-col"><?=$data['nom']?></div>
-
-        </div><?php
-    }?>
-    </div>
-
-</div>
-    
-    </section>
 
  <section class="section">
       <div class="container">
-      <h2>Ajouter liason</h2>
+      <h2>Ajouter une liason</h2>
 
         <div class="row">
           <div class="col-md-7">
@@ -145,6 +128,22 @@ if(isset($_SESSION['grade_utilisateur'])){
 
       </div>
     </section>
+    <div class="container">
+    
+    <h2 class="mt-4">Supprimer des liaisons</h2>
+
+<?php
+$req = get_bdd()->query("SELECT * FROM liaison");
+while ($data = $req->fetch()){ 
+    
+    ?><div class="row mb-3">
+    <div class="col-6 themed-grid-col"><?=$data['nom']?></div>
+    <div class="col-6 themed-grid-col"><a href="index.php?delete=<?=$data['code_liaison']?>">Supprimer</a></div>
+
+    </div><?php
+}?>
+</div>
+
     <?php
     
     
