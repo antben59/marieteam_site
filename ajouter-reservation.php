@@ -14,10 +14,11 @@ if (isset($_POST['num_traversee']) && isset($_POST['id_utilisateurs']) && isset(
 	$quantiteCampingCar = $_POST['7'];
 	$quantiteCamion = $_POST['8'];
 	$etat = 0;
+	$prix = 0;
 
 
-	$sql = "INSERT INTO reservation(num_reservation, num_traversee, id_utilisateurs, quantiteAdulte, quantiteJunior, quantiteEnfant, quantiteVoitureInf4m, quantiteVoitureInf5m, quantiteFourgon, quantiteCampingCar, quantiteCamion, etat)
-	 values (NULL, '$num_traversee', '$id_utilisateurs', '$quantiteAdulte', '$quantiteJunior', '$quantiteEnfant', '$quantiteVoitureInf4m', '$quantiteVoitureInf5m', '$quantiteFourgon', '$quantiteCampingCar', '$quantiteCamion', '$etat')";
+	$sql = "INSERT INTO reservation(num_reservation, num_traversee, id_utilisateurs, quantiteAdulte, quantiteJunior, quantiteEnfant, quantiteVoitureInf4m, quantiteVoitureInf5m, quantiteFourgon, quantiteCampingCar, quantiteCamion, prix, etat)
+	 values (NULL, '$num_traversee', '$id_utilisateurs', '$quantiteAdulte', '$quantiteJunior', '$quantiteEnfant', '$quantiteVoitureInf4m', '$quantiteVoitureInf5m', '$quantiteFourgon', '$quantiteCampingCar', '$quantiteCamion', '$prix' '$etat')";
 	$req = get_bdd()->prepare($sql);
 	$req->execute();
 
