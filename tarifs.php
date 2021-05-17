@@ -9,7 +9,7 @@ include('header.php');
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center text-center">
             <div class="col-md-7 col-sm-12 element-animate">
-              <h1 class="text-white">Envie d'une traversée ?</h1>
+              <h1 class="text-white">Les tarifs</h1>
             </div>
           </div>
         </div>
@@ -20,145 +20,54 @@ include('header.php');
     <section class="section">
     <div class="container">
           <div class="col-md-12">
-          <h5>Choisir les informations relatives à la liaison</h5>
-            <form action="#" method="post">
-              <div class="row">
+          <h5>Les tarifs proposées par liaison</h5>
+          <table class="table table-bordered" style="text-align: center;">
+        <thead>
+          <tr>
+            <th rowspan="2" style="vertical-align: middle;">Secteur</th>
+            <th colspan="4">Liaison</th>
+          </tr>
+          <tr>
+            <th>Code Liaison</th>
+            <th>Distance en miles marin</th>
+            <th>Port de départ</th>
+            <th>Port d'arrivée</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php
+        
+          
+          $req1 = get_bdd()->query("SELECT code_liaison, nom, distance_miles, id_secteur FROM liaison ORDER BY code_liaison ASC");
+            while($donnees1 = $req1->fetch()){   
 
-                <div class="col-md-4 form-group">
-                  <label for="secteur">Secteur</label>
-                  <select class="form-control linked-select" id="country" name="secteur" required>
-                    <option value="0"; ?>Séléctionnez votre secteur</option>
-                  </select>
-                </div>
+              $infosBateau = get_bdd()->query("SELECT nom FROM secteur WHERE id_secteur='$donnees1[3]'")->fetch();
+              $nomSecteur = $infosBateau[0];?> 
+<tr>
 
-                <div class="col-md-4 form-group">
-                  <label for="liaison">Liaison</label>
-                  <select class="form-control" id="state" name="liaison">
-                    <option value="0"; ?>Séléctionnez votre liaison</option>
-                  </select>
-                </div>
+              <td><?php echo $nomSecteur; ?></td>
+              <td><?php echo $donnees1[0]; ?></td>
+              <td><?php echo $donnees1[2]; ?></td>
+              
+              <td><?php $port = explode("-", $donnees1[1]); echo $port[0]; ?></td>
+              <td><?php echo $port[1]; ?></td>
+</tr>
 
-                <div class="col-md-4 form-group">
-                  <label for="date">Date</label>
-                  <input class="form-control" type="date" id="date" name="date" required>
-                </div>
-              </div>
 
-              <div class="row justify-content-center">
-                <div class="col-md-4 form-group">
-                  <button type="submit" style="margin:30px;" class="btn btn-primary btn-md btn-block" name="afficher">Afficher les traversées</button>
-                </div>
-              </div>
-            </form>
+
+
+
+            <?php } ?>  
+    
+
+        <tbody>
+        </table>
+
 
           </div>
         </div>
       </div>
     </section>
-
-<section>
-<div class="container">
-<div class="col-md-12">
-<?php if(isset($_POST['afficher'])){
-  $secteur = $_POST['secteur'];
-  $liaison = $_POST['liaison'];
-  $date = $_POST['date'];
-  $dateFormat = date('d/m/Y', strtotime($date));
-  $nomSecteur = get_bdd()->query("SELECT nom FROM secteur WHERE id_secteur='$secteur'")->fetch();
-  $NomLiaison = get_bdd()->query("SELECT nom FROM liaison WHERE code_liaison='$liaison'")->fetch();
-  ?>
-  <p style="font-size: 20px;text-align:center;">Vous avez choisi la liason : <span style="font-weight:bold;"><?php echo $NomLiaison['nom']; ?></span>, du secteur : <span style="font-weight:bold;"><?php echo $nomSecteur['nom'] ; ?></span>  pour la date du : <span style="font-weight:bold;"><?php echo $dateFormat; ?></span>.</p>
-<?php
-                  $nbOccurrence = get_bdd()->query("SELECT count(*) FROM traversee where code_liaison='$liaison' && date='$date'")->fetch();
-                  if($nbOccurrence['0'] == 0){
-                  ?>
-                  <p style="font-size: 20px;text-align:center;">Aucune traversée n'est prévu</p>
-                  <?php
-                  }else{
-
-?>
-  <p style="font-size: 20px;text-align:center;">La liste des traversées disponibles :</p>
-  <table class="table table-bordered" style="margin-top:20px;">
-                  <thead>
-                    <tr>
-                      <th colspan=3 style="text-align:center;">Traversée</th>
-                      <th colspan=3 style="text-align:center;">Places disponibles par catégorie</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                      <td style="text-align:center;">N°</td>
-                      <td style="text-align:center;">Heure</td>
-                      <td style="text-align:center;">Bateau</td>
-                      <td style="text-align:center;">A Passager</td>
-                      <td style="text-align:center;">B Véh.inf.2m</td>
-                      <td style="text-align:center;">B Véh.sup.2m</td>
-                  </tr>
-<form action="reservation.php" method="POST">
-                  <?php
-                  $req = get_bdd()->query("SELECT * FROM traversee where code_liaison='$liaison' && date='$date'");
-                  while ($donnees = $req->fetch()){
-                  ?>
-                  <tr>
-                    <td style="text-align:center;"><?php echo $donnees['num_traversee']; ?></td>
-                    <td style="text-align:center;"><?php echo substr($donnees['heure'], 0, -3); ?></td>
-                    <td style="text-align:center;">
-                    <?php
-                    $num_traversee = $donnees['num_traversee'];
-                      $NomBateau = get_bdd()->query('SELECT nom FROM bateau INNER JOIN traversee ON bateau.id_bateau = traversee.id_bateau WHERE num_traversee="'.$num_traversee.'"')->fetch();
-                      echo $NomBateau['nom'];
-                    ?>
-                    </td>
-                    <?php
-                    $a = $donnees['id_bateau'];
-                    $capaciteMaxA = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a AND lettre_categorie='A'")->fetch();
-                    $capaciteMaxB = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a AND lettre_categorie='B'")->fetch();
-                    $capaciteMaxC = get_bdd()->query("SELECT capaciteMax FROM contenir WHERE id_bateau=$a AND lettre_categorie='C'")->fetch();
-
-                    $placeReserveA = get_bdd()->query('SELECT SUM(quantiteAdulte+quantiteJunior+quantiteEnfant) FROM reservation WHERE num_traversee="'.$num_traversee.'"')->fetch();
-                    $placeReserveB = get_bdd()->query('SELECT SUM(quantiteVoitureInf4m+quantiteVoitureInf5m) FROM reservation WHERE num_traversee="'.$num_traversee.'"')->fetch();
-                    $placeReserveC = get_bdd()->query('SELECT SUM(quantiteFourgon+quantiteCampingCar+quantiteCamion) FROM reservation WHERE num_traversee="'.$num_traversee.'"')->fetch();
-
-                    ?>
-                    <td style="text-align:center;"><?php echo ($capaciteMaxA['capaciteMax']-$placeReserveA[0]); ?></td>
-                    <td style="text-align:center;"><?php echo ($capaciteMaxB['capaciteMax']-$placeReserveB[0]); ?></td>
-                    <td style="text-align:center;"><?php echo ($capaciteMaxC['capaciteMax']-$placeReserveC[0]); ?></td>
-                    <?php
-                    if (!empty($_SESSION['id_utilisateur'])){
-?>
-                    <td style="text-align:center;"><input type="radio" value="<?php echo $NomLiaison['nom'].";".$donnees['num_traversee'].";".$dateFormat.";". substr($donnees['heure'], 0, -3).";".$date; ?>" name="choix"></td>
-<?php
-                    }
-                    ?>
-
-                  </tr>
-
-                  <?php
-                  }
-                  ?>
-                  </tbody>
-                </table>
-                <?php
-                if (empty($_SESSION['id_utilisateur'])) {
-                  ?>
-                  <p style="font-size: 20px;text-align:center;">Pour réserver une traversée vous devez être inscrit et connecter.</p>
-
-                  <?php
-                }else{?> 
-                  <div class="text-center">
-                    <input type="submit" style="text-align:center;margin : 20px 0 40px 0;" class="btn btn-primary" name="envoyer" value="Réserver cette traversée"></input>
-                  </div><?php
-                }
-                ?>
-
-                  </form>
-<?php
-}
-} ?>
-
-</div>
-</div>
-</section>
     <!-- footer -->
     <?php include('footer.php');?>
     <!-- footer -->
@@ -174,39 +83,6 @@ include('header.php');
     <script src="js/main.js"></script>
 
 
-<script type="text/javascript">
-  $(document).ready(function(){
-  	function loadData(type, category_id){
-  		$.ajax({
-  			url : "liaison_secteur.php",
-  			type : "POST",
-  			data: {type : type, id : category_id},
-  			success : function(data){
-  				if(type == "stateData"){
-  					$("#state").html(data);
-  				}else{
-  					$("#country").append(data);
-  				}
-  				
-  			}
-  		});
-  	}
-
-  	loadData();
-
-  	$("#country").on("change",function(){
-  		var country = $("#country").val();
-
-  		if(country != ""){
-  			loadData("stateData", country);
-  		}else{
-  			$("#state").html("");
-  		}
-
-  		
-  	})
-  });
-</script>
 
   </body>
 </html>

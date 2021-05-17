@@ -183,6 +183,7 @@ else{
 
             <p>Merci de l'intêret que vous porter à la compagnie Marieteam.</p>
             <p>En récompense tout les 5 réservations vous revez automatiquement part mail un bon de réduction de 20% utilisable sur votre prochaine réservation.</p>
+            <p>Vous avez actuellement X points</p>
           <?php }else{
             ?>
             <h1>Récapitulatif</h1><br>
