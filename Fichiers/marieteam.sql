@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 13 avr. 2021 à 11:46
--- Version du serveur :  5.7.26
--- Version de PHP :  7.2.18
+-- Généré le : mar. 25 mai 2021 à 20:14
+-- Version du serveur :  5.7.31
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `marieteam`
+-- Base de données : `marieteam`
 --
 
 -- --------------------------------------------------------
@@ -31,24 +30,24 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `bateau`;
 CREATE TABLE IF NOT EXISTS `bateau` (
   `id_bateau` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(80) NOT NULL,
-  `longueur` varchar(150) NOT NULL,
-  `largeur` varchar(150) NOT NULL,
-  `vitesse` varchar(150) NOT NULL,
-  `equipements` varchar(150) NOT NULL,
-  `image` varchar(150) NOT NULL,
+  `nom` varchar(80) CHARACTER SET utf8mb4 NOT NULL,
+  `longueur` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+  `largeur` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+  `vitesse` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+  `equipements` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+  `image` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`id_bateau`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `bateau`
 --
 
 INSERT INTO `bateau` (`id_bateau`, `nom`, `longueur`, `largeur`, `vitesse`, `equipements`, `image`) VALUES
-(1, 'Kor\' Ant ', '550', '30', '50', '', ''),
-(2, 'Ar Solen', '550', '30', '50', '', ''),
-(3, 'Al\'xi', '550', '30', '50', '', ''),
-(4, 'Luce isle', '550', '30', '50', '', '');
+(1, 'Kor\' Ant ', '1800', '30', '30', 'Accès Handicapé.Bar.Pont promenade.Plongée.', 'http://www.semainedunautisme.com/images/bateau-gonflable-rigide_10.jpg'),
+(2, 'Ar Solen', '550', '30', '50', 'Accès Handicapé.Bar.Pont promenade.Plongée.', 'https://www.masculin.com/images/article/9946/5-bateaux-de-luxe-qui-envoient-du-reve.jpg'),
+(3, 'Al\'xi', '850', '50', '50', 'Accès Handicapé.Bar.Pont promenade.Baby foot.Dansoir.', 'http://www.galerie-imagine.fr/images/image-de-bateau_10.jpg'),
+(4, 'Luce isle', '1100', '50', '80', 'Accès Handicapé.Bar.Pont promenade.Baby foot.Dansoir.', 'https://www.seafaridiving.fr/medias/img/750x420/captain-sparrow-bateau-seafari-plongee.jpg');
 
 -- --------------------------------------------------------
 
@@ -58,10 +57,10 @@ INSERT INTO `bateau` (`id_bateau`, `nom`, `longueur`, `largeur`, `vitesse`, `equ
 
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
-  `lettre_categorie` char(5) NOT NULL,
-  `libelle` varchar(80) NOT NULL,
+  `lettre_categorie` char(5) CHARACTER SET utf8mb4 NOT NULL,
+  `libelle` varchar(80) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`lettre_categorie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -80,12 +79,12 @@ INSERT INTO `categorie` (`lettre_categorie`, `libelle`) VALUES
 
 DROP TABLE IF EXISTS `contenir`;
 CREATE TABLE IF NOT EXISTS `contenir` (
-  `lettre_categorie` char(5) NOT NULL,
+  `lettre_categorie` char(5) CHARACTER SET utf8mb4 NOT NULL,
   `id_bateau` int(11) NOT NULL,
   `capaciteMax` int(11) NOT NULL,
   PRIMARY KEY (`lettre_categorie`,`id_bateau`),
   KEY `CONTENIR_BATEAU0_FK` (`id_bateau`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `contenir`
@@ -108,28 +107,13 @@ INSERT INTO `contenir` (`lettre_categorie`, `id_bateau`, `capaciteMax`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `enregistrer`
---
-
-DROP TABLE IF EXISTS `enregistrer`;
-CREATE TABLE IF NOT EXISTS `enregistrer` (
-  `num_type` int(11) NOT NULL,
-  `num_reservation` int(11) NOT NULL,
-  `quantite` int(11) NOT NULL,
-  PRIMARY KEY (`num_type`,`num_reservation`),
-  KEY `ENREGISTRER_RESERVATION0_FK` (`num_reservation`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `liaison`
 --
 
 DROP TABLE IF EXISTS `liaison`;
 CREATE TABLE IF NOT EXISTS `liaison` (
   `code_liaison` int(11) NOT NULL,
-  `nom` varchar(100) NOT NULL,
+  `nom` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `distance_miles` float NOT NULL,
   `id_secteur` int(11) NOT NULL,
   `port_depart` int(11) NOT NULL,
@@ -138,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `liaison` (
   KEY `LIAISON_SECTEUR_FK` (`id_secteur`),
   KEY `LIAISON_PORT0_FK` (`port_depart`),
   KEY `LIAISON_PORT1_FK` (`port_arrivee`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `liaison`
@@ -159,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `periode` (
   `dateDeb` date NOT NULL,
   `dateFin` date NOT NULL,
   PRIMARY KEY (`dateDeb`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `periode`
@@ -179,9 +163,9 @@ INSERT INTO `periode` (`dateDeb`, `dateFin`) VALUES
 DROP TABLE IF EXISTS `port`;
 CREATE TABLE IF NOT EXISTS `port` (
   `id_port` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(80) NOT NULL,
+  `nom` varchar(80) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`id_port`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `port`
@@ -204,27 +188,46 @@ INSERT INTO `port` (`id_port`, `nom`) VALUES
 
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE IF NOT EXISTS `reservation` (
-  `num_reservation` int(11) NOT NULL,
+  `num_reservation` int(11) NOT NULL AUTO_INCREMENT,
   `num_traversee` int(11) NOT NULL,
   `id_utilisateurs` int(11) NOT NULL,
+  `quantiteAdulte` int(11) NOT NULL,
+  `quantiteJunior` int(11) NOT NULL,
+  `quantiteEnfant` int(11) NOT NULL,
+  `quantiteVoitureInf4m` int(11) NOT NULL,
+  `quantiteVoitureInf5m` int(11) NOT NULL,
+  `quantiteFourgon` int(11) NOT NULL,
+  `quantiteCampingCar` int(11) NOT NULL,
+  `quantiteCamion` int(11) NOT NULL,
+  `prix` float NOT NULL,
+  `reduction` float NOT NULL,
+  `etat` int(11) NOT NULL,
   PRIMARY KEY (`num_reservation`),
   KEY `RESERVATION_TRAVERSEE_FK` (`num_traversee`),
   KEY `id_utilisateurs` (`id_utilisateurs`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `reservation`
 --
 
-INSERT INTO `reservation` (`num_reservation`, `num_traversee`, `id_utilisateurs`) VALUES
-(545, 541196, 4),
-(546, 541197, 4),
-(547, 541196, 4),
-(548, 541196, 4),
-(549, 541196, 4),
-(550, 541196, 4),
-(551, 541196, 4),
-(552, 541197, 4);
+INSERT INTO `reservation` (`num_reservation`, `num_traversee`, `id_utilisateurs`, `quantiteAdulte`, `quantiteJunior`, `quantiteEnfant`, `quantiteVoitureInf4m`, `quantiteVoitureInf5m`, `quantiteFourgon`, `quantiteCampingCar`, `quantiteCamion`, `prix`, `reduction`, `etat`) VALUES
+(15, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 0, 0),
+(16, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 5.6, 0),
+(17, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 22.4, 0, 0),
+(18, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 5.6, 0),
+(19, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 5.6, 0),
+(20, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 5.6, 0),
+(21, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 22.4, 0, 0),
+(22, 541196, 4, 11, 0, 0, 0, 0, 0, 0, 0, 198, 0, 0),
+(23, 541196, 4, 11, 0, 0, 0, 0, 0, 0, 0, 198, 0, 0),
+(24, 541196, 4, 20, 25, 0, 0, 0, 10, 0, 0, 2527.5, 0, 0),
+(25, 541197, 4, 20, 30, 18, 0, 0, 10, 0, 10, 5363.8, 0, 0),
+(26, 541197, 4, 17, 0, 0, 0, 0, 0, 0, 0, 306, 0, 0),
+(27, 541196, 4, 17, 0, 0, 0, 0, 0, 0, 0, 306, 0, 0),
+(28, 541197, 4, 50, 50, 0, 0, 0, 0, 0, 0, 1091.25, 363.75, 0),
+(29, 541196, 4, 17, 0, 0, 0, 0, 0, 0, 0, 306, 0, 0),
+(30, 541196, 4, 17, 0, 0, 0, 0, 0, 0, 0, 306, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -235,9 +238,9 @@ INSERT INTO `reservation` (`num_reservation`, `num_traversee`, `id_utilisateurs`
 DROP TABLE IF EXISTS `secteur`;
 CREATE TABLE IF NOT EXISTS `secteur` (
   `id_secteur` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(80) NOT NULL,
+  `nom` varchar(80) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`id_secteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `secteur`
@@ -270,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `tarifer` (
   PRIMARY KEY (`dateDeb`,`code_liaison`,`num_type`),
   KEY `TARIFER_LIAISON0_FK` (`code_liaison`),
   KEY `TARIFER_TYPE1_FK` (`num_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `tarifer`
@@ -302,15 +305,15 @@ CREATE TABLE IF NOT EXISTS `traversee` (
   PRIMARY KEY (`num_traversee`),
   KEY `TRAVERSEE_LIAISON_FK` (`code_liaison`),
   KEY `TRAVERSEE_BATEAU0_FK` (`id_bateau`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `traversee`
 --
 
 INSERT INTO `traversee` (`num_traversee`, `date`, `heure`, `code_liaison`, `id_bateau`) VALUES
-(541196, '2021-04-14', '09:00:00', 24, 2),
-(541197, '2021-04-14', '10:00:00', 24, 1);
+(541196, '2021-06-14', '09:00:00', 24, 2),
+(541197, '2021-06-14', '10:00:00', 24, 1);
 
 -- --------------------------------------------------------
 
@@ -321,11 +324,11 @@ INSERT INTO `traversee` (`num_traversee`, `date`, `heure`, `code_liaison`, `id_b
 DROP TABLE IF EXISTS `type`;
 CREATE TABLE IF NOT EXISTS `type` (
   `num_type` int(11) NOT NULL,
-  `libelle` varchar(80) NOT NULL,
-  `lettre_categorie` char(5) NOT NULL,
+  `libelle` varchar(80) CHARACTER SET utf8mb4 NOT NULL,
+  `lettre_categorie` char(5) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`num_type`),
   KEY `TYPE_CATEGORIE_FK` (`lettre_categorie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `type`
@@ -333,8 +336,8 @@ CREATE TABLE IF NOT EXISTS `type` (
 
 INSERT INTO `type` (`num_type`, `libelle`, `lettre_categorie`) VALUES
 (1, 'Adulte', 'A'),
-(2, 'Junior 8 à 18 ans', 'A'),
-(3, 'Enfant 0 à 7 ans', 'A'),
+(2, 'Junior 8-18 ans', 'A'),
+(3, 'Enfant 0-7 ans', 'A'),
 (4, 'Voiture long.inf.4m', 'B'),
 (5, 'Voiture long.inf.5m', 'B'),
 (6, 'Fourgon', 'C'),
@@ -354,17 +357,23 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `prenom` varchar(250) NOT NULL,
   `mail` varchar(250) NOT NULL,
   `mot_de_passe` varchar(250) NOT NULL,
+  `adresse` varchar(80) NOT NULL,
+  `code_postal` int(5) NOT NULL,
+  `ville` varchar(30) NOT NULL,
+  `point_fidelite` int(11) NOT NULL,
   `grade` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `mail`, `mot_de_passe`, `grade`) VALUES
-(1, 'bjugtgtt', 'gtgtg', 'rffrfr@gmail.com', 'a', 0),
-(4, 'decool', 'dylan', 'dylan.decool14@gmail.com', '123', 0);
+INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `mail`, `mot_de_passe`, `adresse`, `code_postal`, `ville`, `point_fidelite`, `grade`) VALUES
+(1, 'bjugtgtt', 'gtgtg', 'rffrfr@gmail.com', 'a', '', 0, '', 25, 0),
+(4, 'decool', 'dylan', 'dylan.decool14@gmail.com', '123', '2 rue des ormeaux', 59940, 'Estaires', 0, 1),
+(5, 'fffeeffe', 'fdefeffeef', 'a@gmail.com', 'a', 'feeeeeeeeeee', 66666, 'gfddfsgdgfs', 25, 0),
+(6, 'bbb', 'bbbbb', 'bbb@gmail.com', 'bbbbb', 'bbb', 56544, 'fgfsg', 100, 0);
 
 --
 -- Contraintes pour les tables déchargées
@@ -376,12 +385,6 @@ INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `mail`, `mot_de_passe`, `grad
 ALTER TABLE `contenir`
   ADD CONSTRAINT `CONTENIR_BATEAU0_FK` FOREIGN KEY (`id_bateau`) REFERENCES `bateau` (`id_bateau`),
   ADD CONSTRAINT `CONTENIR_CATEGORIE_FK` FOREIGN KEY (`lettre_categorie`) REFERENCES `categorie` (`lettre_categorie`);
-
---
--- Contraintes pour la table `enregistrer`
---
-ALTER TABLE `enregistrer`
-  ADD CONSTRAINT `ENREGISTRER_RESERVATION0_FK` FOREIGN KEY (`num_reservation`) REFERENCES `reservation` (`num_reservation`);
 
 --
 -- Contraintes pour la table `liaison`
