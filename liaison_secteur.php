@@ -11,7 +11,7 @@
 		while($row = mysqli_fetch_assoc($query)){
 		  $str .= "<option value='{$row['id_secteur']}'>{$row['nom']}</option>";
 		}
-	}else if($_POST['type'] == "stateData"){
+	}else if($_POST['type'] == "liaisonData"){
 
 		$sql = "SELECT * FROM liaison WHERE id_secteur = {$_POST['id']} ORDER BY nom ASC";
 
@@ -22,6 +22,5 @@
 		  $str .= "<option value='{$row['code_liaison']}'>{$row['nom']}</option>";
 		}
 	}
-
 	echo $str;
- ?>
+?>

@@ -113,9 +113,11 @@ if(isset($_POST['connexion'])){
         </div>
       </div>
     </section>
+
     <section class="section">
       <div class="container">
         <div class="row">
+          <!-- Partie Formulaire d'inscription -->
           <div class="col-md-6">
           <h1>Inscription</h1>
             <form action="connexion_inscription.php" method="post">
@@ -160,9 +162,9 @@ if(isset($_POST['connexion'])){
                   <button type="submit" name="inscription" class="btn btn-primary btn-lg btn-block">S'enregistrer</button>
                 </div>
               </div>
-
             </form>
           </div>
+          <!-- Partie Formulaire de connexion -->
           <div class="col-md-6">
           <h1>Connexion</h1>
           <form action="connexion_inscription.php" method="post">
@@ -178,16 +180,14 @@ if(isset($_POST['connexion'])){
                   <input type="password" id="email" class="form-control form-control-lg" name="mot_de_passe" required>
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-md-6 form-group">
                 <button type="submit" name="connexion"class="btn btn-primary btn-lg btn-block">Connexion</button>
-
                 </div>
               </div>
-
             </form>
           </div>
+          
         </div>
       </div>
     </section>
@@ -195,9 +195,6 @@ if(isset($_POST['connexion'])){
     <!-- footer -->
     <?php include('footer.php');?>
     <!-- footer -->
-
-    <!-- loader -->
-    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
 
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -208,21 +205,10 @@ if(isset($_POST['connexion'])){
   </body>
 </html>
 
-
-
-
-
 <?php
 if(isset($_POST['inscription'])){
-  if(
-      !empty($_POST['nom'])
-      && !empty($_POST['prenom'])
-      && !empty($_POST['mail'])
-      && !empty($_POST['mot_de_passe'])
-      && !empty($_POST['adresse'])
-      && !empty($_POST['code_postal'])
-      && !empty($_POST['ville'])
-  ){
+  if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['mail']) && !empty($_POST['mot_de_passe']) && !empty($_POST['adresse']) && !empty($_POST['code_postal']) && !empty($_POST['ville'])){
+
       $nom = htmlspecialchars($_POST['nom'], ENT_QUOTES);
       $prenom = htmlspecialchars($_POST['prenom'], ENT_QUOTES);
       $adresse = htmlspecialchars($_POST['adresse'], ENT_QUOTES);
@@ -231,46 +217,17 @@ if(isset($_POST['inscription'])){
       $mail = htmlspecialchars(strtolower($_POST['mail']), ENT_QUOTES);
       $mot_de_passe = htmlspecialchars($_POST['mot_de_passe'], ENT_QUOTES);
 
+      try{
+        $sql = "INSERT INTO utilisateurs(id, nom, prenom, mail, mot_de_passe, adresse, code_postal, ville, point_fidelite, grade)values (null, '$nom', '$prenom', '$mail', '$mot_de_passe', '$adresse', '$code_postal','$ville','0','0')";
+        $req = get_bdd()->prepare($sql);
+        $req->execute();
+      }catch (Exception $e) {
+        echo 'Exception reçue : ',  $e->getMessage(), "\n";
+      }
 
+    }
 
-              try{
-                  $sql = "INSERT INTO utilisateurs(
-                      id,
-                      nom,
-                      prenom,
-                      mail,
-                      mot_de_passe,
-                      adresse,
-                      code_postal,
-                      ville,
-                      point_fidelite,
-                      grade
-                      )
-                      values (
-                        null,
-                      '$nom',
-                      '$prenom',
-                      '$mail',
-                      '$mot_de_passe',
-                      '$adresse',
-                      '$code_postal',
-                      '$ville',
-                      '0',
-                      '0'
-                      )";
-
-                  $req = get_bdd()->prepare($sql);
-                  $req->execute();
-
-
-                }
-                catch (Exception $e) {
-                    echo 'Exception reçue : ',  $e->getMessage(), "\n";
-                }
-
-            }
-
-        }
+  }
 
 
 

@@ -5,7 +5,6 @@ include('header.php');
 ?>
     <section class="inner-page">
       <div class="slider-item py-5" style="background-image: url('img/slider-1.jpg');">
-        
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center text-center">
             <div class="col-md-7 col-sm-12 element-animate">
@@ -13,7 +12,6 @@ include('header.php');
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -37,15 +35,24 @@ include('header.php');
         <tbody>
         <?php
         
-          
+          $temp = "";
           $req1 = get_bdd()->query("SELECT code_liaison, nom, distance_miles, id_secteur FROM liaison ORDER BY code_liaison ASC");
             while($donnees1 = $req1->fetch()){   
-
+              
               $infosBateau = get_bdd()->query("SELECT nom FROM secteur WHERE id_secteur='$donnees1[3]'")->fetch();
-              $nomSecteur = $infosBateau[0];?> 
+              $nomSecteur = $infosBateau[0];
+              
+              ?> 
 <tr>
 
-              <td><?php echo $nomSecteur; ?></td>
+              <td>
+              <?php 
+              if($temp != $nomSecteur){
+                echo $nomSecteur;
+                $temp = $nomSecteur;
+              }; 
+              ?>
+              </td>
               <td><?php echo $donnees1[0]; ?></td>
               <td><?php echo $donnees1[2]; ?></td>
               

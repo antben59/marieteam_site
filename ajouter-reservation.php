@@ -68,4 +68,4 @@ if (isset($_POST['num_traversee']) && isset($_POST['id_utilisateurs']) && isset(
 	}
 	}
 }
-//header('Location: mes-reservations.php');
+header('Location: mes-reservations.php');

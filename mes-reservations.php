@@ -2,7 +2,7 @@
 session_start();
 require_once('db_connect.php');
 
-
+// Si la session existe alors il récupère les informations sinon il redirige automatiquement vers la page index.php
 if (isset($_SESSION["id_utilisateur"])) {
 
   $id_utilisateur = $_SESSION['id_utilisateur'];

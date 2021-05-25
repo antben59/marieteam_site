@@ -3,7 +3,7 @@
         <div class="row">
           <div class="col-md-3">
             <p>
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> MarieTeam  <i class="fa fa-heart text-danger" aria-hidden="true"></i>
             </p>
           </div>
           <div class="col-md-3">
@@ -17,7 +17,14 @@
             <h3 class="text-white">Autres liens</h3>
             <ul class="list-unstyled footer-link">
               <li><a href="#" data-toggle="modal" data-target="#mentions_legales">Mentions légales</a></li>
-              <!-- Modal -->
+              <li><a href="#" data-toggle="modal" data-target="#protection_des_donnees">Protection des données</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#conditions_generales_de_vente">Conditions Générales de Vente</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#conditions_denerales_d_utilisation">Conditions Générales d'utilisation</a></li>
+              <li><a href="contact.php">Nous contacter</a></li>
+            </ul>
+          </div>
+
+              <!-- Modal mentions légales -->
                 <div class="modal fade" id="mentions_legales" tabindex="-1" role="dialog" aria-labelledby="mentions_legales" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -37,8 +44,8 @@
                   </div>
                 </div>
               <!-- Fin du modal -->
-              <li><a href="#" data-toggle="modal" data-target="#protection_des_donnees">Protection des données</a></li>
-              <!-- Modal -->
+
+              <!-- Modal protection des données -->
               <div class="modal fade" id="protection_des_donnees" tabindex="-1" role="dialog" aria-labelledby="protection_des_donnees" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -58,8 +65,8 @@
                   </div>
                 </div>
               <!-- Fin du modal -->
-              <li><a href="#" data-toggle="modal" data-target="#conditions_generales_de_vente">Conditions Générales de Vente</a></li>
-              <!-- Modal -->
+
+              <!-- Modal conditions générale de vente-->
               <div class="modal fade" id="conditions_generales_de_vente" tabindex="-1" role="dialog" aria-labelledby="conditions_generales_de_vente" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -79,13 +86,13 @@
                   </div>
                 </div>
               <!-- Fin du modal -->
-			        <li><a href="#" data-toggle="modal" data-target="#conditions_denerales_d_utilisation">Conditions Générales d'utilisation</a></li>
-              <!-- Modal -->
-              <div class="modal fade" id="conditions_denerales_d_utilisation" tabindex="-1" role="dialog" aria-labelledby="conditions_denerales_d_utilisation" aria-hidden="true">
+
+              <!-- Modal conditions générale d'utilisation -->
+              <div class="modal fade" id="conditions_generales_d_utilisation" tabindex="-1" role="dialog" aria-labelledby="conditions_denerales_d_utilisation" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="conditions_denerales_d_utilisation">Conditions Générales d'utilisation</h5>
+                        <h5 class="modal-title" id="conditions_generales_d_utilisation">Conditions Générales d'utilisation</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -100,9 +107,7 @@
                   </div>
                 </div>
               <!-- Fin du modal -->
-              <li><a href="contact.php">Nous contacter</a></li>
-            </ul>
-          </div>
+
           <div class="col-md-3">
             <h3 class="text-white">Réseaux sociaux</h3>
             <ul class="list-unstyled footer-link d-flex footer-social">
