@@ -21,48 +21,51 @@ include('header.php');
     <div class="container">
           <div class="col-md-12">
           <h5>Les tarifs proposées par liaison</h5>
+
+          <?php 
+         $req1 = get_bdd()->query("SELECT * FROM liaison");
+          while($donnees1 = $req1->fetch()){
+          
+
+?>
           <table class="table table-bordered" style="text-align: center;">
         <thead>
           <tr>
-            <th rowspan="2" style="vertical-align: middle;">Secteur</th>
-            <th colspan="4">Liaison</th>
+            <th colspan="6">Liaison <?php echo $donnees1['code_liaison'] ?> : <?php echo $donnees1['nom'] ?></th>
           </tr>
           <tr>
-            <th>Code Liaison</th>
-            <th>Distance en miles marin</th>
-            <th>Port de départ</th>
-            <th>Port d'arrivée</th>
+            <th rowspan="2" style="vertical-align: middle;">Catégorie</th>
+            <th rowspan="2" style="vertical-align: middle;">Type</th>
+            <th colspan="4">Période</th>
+          </tr>
+          <tr>
+          <?php 
+         $req2 = get_bdd()->query("SELECT dateDeb, dateFin FROM periode ORDER BY dateDeb ASC");
+          while($donnees2 = $req2->fetch()){ 
+
+?>
+            <th><?php echo $donnees2['dateDeb'] ?><br><?php echo $donnees2['dateFin'] ?></th>
+            <?php } ?>
           </tr>
         </thead>
         <tbody>
-        <?php
+        <?php 
+         $req3 = get_bdd()->query("SELECT * FROM categorie ORDER BY lettre_categorie ASC");
+          while($donnees3 = $req3->fetch()){
+            var_dump($donnees3);
+?>
+      <tr>
+        <td><?php echo $donnees3['lettre_categorie'] ?><br><?php echo $donnees3['libelle'] ?></td>
+        <td></td>
+
         
-          
-          $req1 = get_bdd()->query("SELECT code_liaison, nom, distance_miles, id_secteur FROM liaison ORDER BY code_liaison ASC");
-            while($donnees1 = $req1->fetch()){   
+        <?php } ?>
 
-              $infosBateau = get_bdd()->query("SELECT nom FROM secteur WHERE id_secteur='$donnees1[3]'")->fetch();
-              $nomSecteur = $infosBateau[0];?> 
-<tr>
-
-              <td><?php echo $nomSecteur; ?></td>
-              <td><?php echo $donnees1[0]; ?></td>
-              <td><?php echo $donnees1[2]; ?></td>
-              
-              <td><?php $port = explode("-", $donnees1[1]); echo $port[0]; ?></td>
-              <td><?php echo $port[1]; ?></td>
-</tr>
-
-
-
-
-
-            <?php } ?>  
-    
+      </tr>
 
         <tbody>
         </table>
-
+        <?php } ?>
 
           </div>
         </div>

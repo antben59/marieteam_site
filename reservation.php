@@ -114,11 +114,11 @@
                       <td><?php echo $donnees1['tarif']; ?></td>
                       <td>
                         <select class="form-control" id="" name="<?php echo $req3['num_type']; ?>">
-                          <option active>0</option>
+                          <option value="<?php echo "0;".$donnees1['tarif']; ?>" active>0</option>
                           <?php
                           for($i = 1;$i <= 50;$i++){
                             ?>
-                          <option><?php echo $i; ?></option>  
+                          <option value="<?php echo $i.";".$donnees1['tarif']; ?>"><?php echo $i; ?></option>  
                           <?php
                           }
                           ?>
@@ -134,6 +134,7 @@
                   </tbody>
                 </table>
                 </div>
+              </div>
               </div>
               <div class="row">
                 <div class="col-md-4 form-group">

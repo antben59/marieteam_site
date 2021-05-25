@@ -7,7 +7,7 @@ if (isset($_SESSION["id_utilisateur"])) {
 
   $id_utilisateur = $_SESSION['id_utilisateur'];
   $infosUtilisateur = get_bdd()->query("SELECT count(num_reservation) FROM reservation where id_utilisateurs='$id_utilisateur'")->fetch();
-  $reservationParPage = 5;
+  $reservationParPage = 3;
   $reservationTotalesReq = get_bdd()->prepare("SELECT num_reservation FROM reservation WHERE id_utilisateurs='$id_utilisateur'");
   $reservationTotalesReq->execute();
 
@@ -125,11 +125,17 @@ else{
           <div class="col-md-12">
           <?php if($infosUtilisateur[0]>0){ ?>
             <h1>Récapitulatif</h1><br>
+            <?php 
+              $infosUtilisateurReservation = get_bdd()->query("SELECT nom, prenom , point_fidelite FROM utilisateurs WHERE id='$id_utilisateur'")->fetch();
+?>
+            <p>En récompense tout traversée reserver 2 mois à l'avance vous permettra d'avoir un bonus de 25 points (100 points donne droit à une ristourne de 25% automatiquement déduit sur la prochaine réservation). </p>
+            <p>Vous avez actuellement <?php echo $infosUtilisateurReservation['point_fidelite'] ?> points</p>
             <h3>Vous avez effectué au total <?php echo $infosUtilisateur[0]; ?> réservations.</h3>
           <table class="table table-bordered">
         <thead>
           <tr>
             <th scope="col">Informations</th>
+            <th scope="col">Prix</th>
             <th scope="col">Réservation N°</th>
             <th scope="col">Traversée N°</th>
             <th scope="col">Bateau</th>
@@ -146,7 +152,7 @@ else{
             ?>
               <tr>
               <?php
-              $infosUtilisateurReservation = get_bdd()->query("SELECT nom, prenom FROM utilisateurs WHERE id='$id_utilisateur'")->fetch();
+              $infosUtilisateurReservation = get_bdd()->query("SELECT nom, prenom , point_fidelite FROM utilisateurs WHERE id='$id_utilisateur'")->fetch();
               $num_traversee = $donnees['num_traversee'];
               $infosBateau = get_bdd()->query("SELECT id_bateau, date, heure FROM traversee WHERE num_traversee='$num_traversee'")->fetch();
               $id_bateau = $infosBateau[0];
@@ -157,12 +163,59 @@ else{
             
               
               ?>
-                <td><?php echo ucwords($infosUtilisateurReservation['nom']." ".$infosUtilisateurReservation['prenom']); ?></td>
+                <td><?php echo ucwords($infosUtilisateurReservation['nom']." ".$infosUtilisateurReservation['prenom']); ?><br>
+                <p style="font-size:12px;">
+                <?php 
+                if($donnees['quantiteAdulte']>0){
+                  echo "Adulte : ".$donnees['quantiteAdulte']."</br>";
+                }
+                if($donnees['quantiteJunior']>0){
+                  echo "Junior : ".$donnees['quantiteJunior']."</br>";
+                }
+                if($donnees['quantiteEnfant']>0){
+                  echo "Enfant : ".$donnees['quantiteEnfant']."</br>";
+                }
+                if($donnees['quantiteVoitureInf4m']>0){
+                  echo "Voiture Inférieur 4m : ".$donnees['quantiteVoitureInf4m']."</br>";
+                }
+                if($donnees['quantiteVoitureInf5m']>0){
+                  echo "Voiture Inférieur 5m : ".$donnees['quantiteVoitureInf5m']."</br>";
+                }
+                if($donnees['quantiteFourgon']>0){
+                  echo "Fourgon : ".$donnees['quantiteFourgon']."</br>";
+                }
+                if($donnees['quantiteCampingCar']>0){
+                  echo "Camping Car : ".$donnees['quantiteCampingCar']."</br>";
+                }
+                if($donnees['quantiteCamion']>0){
+                  echo "Camion : ".$donnees['quantiteCamion']."</br>";
+                }
+
+                
+                ?></p>
+                </td>
+                <td>
+                  <?php echo $donnees['prix']; ?>€
+                  <?php if($donnees['reduction']>0){
+                    echo "<br>";
+                    ?>
+                    <p style="font-size:12px;">
+                    <?php 
+                      echo $donnees['reduction']."€";
+                    ?>
+                     de réduction déduit</p>
+                    <?php
+                  }?>
+                </td>
                 <td><?php echo $donnees['num_reservation']; ?></td>
                 <td><?php echo $num_traversee; ?></td>
 
                 <td><?php echo $infosNomBateau['nom']; ?></td>
-                <td><?php echo $date_traversee." à ".substr($heure_traversee, 0, -3); ?></td>
+                <?php
+                $timestamp = strtotime($date_traversee); 
+                $newDate = date("d-m-Y", $timestamp );
+                ?>
+                <td><?php echo $newDate." à ".substr($heure_traversee, 0, -3); ?></td>
                 <td>Valider</td>
               </tr>
         <?php } ?>
@@ -180,10 +233,7 @@ else{
               }
               ?>
           </div>
-
             <p>Merci de l'intêret que vous porter à la compagnie Marieteam.</p>
-            <p>En récompense tout les 5 réservations vous revez automatiquement part mail un bon de réduction de 20% utilisable sur votre prochaine réservation.</p>
-            <p>Vous avez actuellement X points</p>
           <?php }else{
             ?>
             <h1>Récapitulatif</h1><br>
