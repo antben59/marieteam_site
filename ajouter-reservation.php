@@ -37,7 +37,7 @@ if (isset($_POST['num_traversee']) && isset($_POST['id_utilisateurs']) && isset(
 		var_dump($point);
 		if($point[0]>=100){
 			$reduction = ($prix/4);
-			$prix = (($prix/4)*3);
+			$prix = $prix-$reduction;
 			$nouveauSolde = $point[0]-100;
 			$sqlMiseAJourSolde = "UPDATE utilisateurs SET point_fidelite = '$nouveauSolde' WHERE id='$id_utilisateurs'";
 			$req1 = get_bdd()->prepare($sqlMiseAJourSolde);

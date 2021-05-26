@@ -18,7 +18,6 @@ if(isset($_POST['connexion'])){
                   $_SESSION['id_utilisateur'] = $get_infos['id'];
                   $_SESSION['grade_utilisateur'] = $get_infos['grade'];
       }
-
   }
 }
   if (isset($_SESSION["id_utilisateur"])) {

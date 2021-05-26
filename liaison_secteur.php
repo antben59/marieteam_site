@@ -1,5 +1,4 @@
 <?php
-    require_once('db_connect.php');
 	$conn = mysqli_connect("localhost","root","","marieteam") or die("Connection failed");
 
 	if($_POST['type'] == ""){

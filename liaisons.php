@@ -192,7 +192,6 @@ include('header.php');
           }
         });
       }
-
       loadData();
       $("#secteur").on("change",function(){
         var secteur = $("#secteur").val();
