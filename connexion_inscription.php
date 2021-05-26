@@ -14,7 +14,7 @@ if(isset($_POST['connexion'])){
       $get_infos = $sql->fetch();
       $pwd_hash = $get_infos['mot_de_passe'];
 
-          if($pwd == $pwd_hash){
+          if(password_verify($pwd, $pwd_hash)){
                   $_SESSION['id_utilisateur'] = $get_infos['id'];
                   $_SESSION['grade_utilisateur'] = $get_infos['grade'];
       }
