@@ -4,7 +4,7 @@ require_once('db_connect.php');
 if(isset($_POST['connexion'])){
 
   $mail = htmlspecialchars($_POST['mail'], ENT_QUOTES);
-  $pwd = htmlspecialchars($_POST['mot_de_passe'], ENT_QUOTES);
+  $pwd = $_POST['mot_de_passe'];
   $sql = get_bdd()->prepare("SELECT * FROM utilisateurs WHERE mail ='$mail'");
   $sql->execute();
   $n_id = $sql->rowCount();
@@ -215,7 +215,7 @@ if(isset($_POST['inscription'])){
       $code_postal = htmlspecialchars($_POST['code_postal'], ENT_QUOTES);
       $ville = htmlspecialchars($_POST['ville'], ENT_QUOTES);
       $mail = htmlspecialchars(strtolower($_POST['mail']), ENT_QUOTES);
-      $mot_de_passe = htmlspecialchars($_POST['mot_de_passe'], ENT_QUOTES);
+      $mot_de_passe = password_hash($_POST['mot_de_passe'], PASSWORD_BCRYPT);
 
       try{
         $sql = "INSERT INTO utilisateurs(id, nom, prenom, mail, mot_de_passe, adresse, code_postal, ville, point_fidelite, grade)values (null, '$nom', '$prenom', '$mail', '$mot_de_passe', '$adresse', '$code_postal','$ville','0','0')";
