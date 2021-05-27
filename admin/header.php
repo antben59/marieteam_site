@@ -36,7 +36,10 @@
           <div class="collapse navbar-collapse position-relative" id="navbarsExample05">
             <ul class="navbar-nav mx-auto pl-lg-5 pl-0 d-flex align-items-center">
               <li class="nav-item">
-                <a class="nav-link" href="../index.php">Accueil</a>
+                <a class="nav-link" href="index.php">Gestion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="statistique.php">Statistique</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="../liaisons.php">Retour au site</a>

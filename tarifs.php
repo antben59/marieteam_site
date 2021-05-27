@@ -42,7 +42,6 @@ include('header.php');
           <?php 
          $req2 = get_bdd()->query("SELECT dateDeb, dateFin FROM periode ORDER BY dateDeb ASC");
           while($donnees2 = $req2->fetch()){ 
-
 ?>
             <th><?php echo $donnees2['dateDeb'] ?><br><?php echo $donnees2['dateFin'] ?></th>
             <?php } ?>
@@ -52,7 +51,6 @@ include('header.php');
         <?php 
          $req3 = get_bdd()->query("SELECT * FROM categorie ORDER BY lettre_categorie ASC");
           while($donnees3 = $req3->fetch()){
-            var_dump($donnees3);
 ?>
       <tr>
         <td><?php echo $donnees3['lettre_categorie'] ?><br><?php echo $donnees3['libelle'] ?></td>
