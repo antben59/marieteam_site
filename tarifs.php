@@ -38,7 +38,8 @@ include('header.php');
                 <th colspan="4">Période</th>
               </tr>
               <tr>
-                <?php 
+                <?php
+                  $aujourdhui = get_bdd()->query("SELECT count(lettre_categorie) FROM type")->fetch();
                   while($donnees2 = $req2->fetch()){ 
                 ?>
                   <th><?php echo $donnees2['dateDeb'] ?><br><?php echo $donnees2['dateFin'] ?></th>
@@ -46,11 +47,63 @@ include('header.php');
               </tr>
             </thead>
             <tbody>
-
+            <?php
+              
+              
+            ?>
               <tr>
-                
+                <td rowspan="3"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
 
+              <tr>
+                <td rowspan="2"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td rowspan="3"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
             <tbody>
           </table>
           <?php } ?>
