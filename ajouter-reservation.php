@@ -30,7 +30,7 @@ if (isset($_POST['num_traversee']) && isset($_POST['id_utilisateurs']) && isset(
 
 	// Si l'utilisateur ne rempli pas le formulaire de réservation il est redirigé vers la page liaison
 	// Sinon on va chercher le nombre de point de fidelité et si il en a plus de 100 il obtient la remise de 25% sur sa réservation
-	if(intval($quantite_Adulte[0]) == 0 && intval($quantite_Junior[0]) == 0 && intval(quantite_Enfant[0]) == 0 && intval($quantite_VoitureInf4m[0]) == 0 && intval($quantite_VoitureInf5m[0]) == 0 && intval($quantite_Fourgon[0]) == 0 && intval($quantite_CampingCar[0]) == 0 && intval($quantite_Camion[0]) == 0){
+	if(intval($quantite_Adulte[0]) == 0 && intval($quantite_Junior[0]) == 0 && intval($quantite_Enfant[0]) == 0 && intval($quantite_VoitureInf4m[0]) == 0 && intval($quantite_VoitureInf5m[0]) == 0 && intval($quantite_Fourgon[0]) == 0 && intval($quantite_CampingCar[0]) == 0 && intval($quantite_Camion[0]) == 0){
 		header('Location: liaisons.php');
 	}else{
 		$point = get_bdd()->query("SELECT point_fidelite FROM utilisateurs where id='$id_utilisateurs'")->fetch();
