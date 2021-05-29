@@ -49,7 +49,6 @@ include('header.php');
             <tbody>
             <?php
               
-              
             ?>
               <tr>
                 <td rowspan="3"></td>

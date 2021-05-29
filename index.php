@@ -94,47 +94,6 @@ include('header.php');
     </section>
     <!-- END section -->
 
-    
-    <section class="section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 element-animate">
-          <div class="col-md-8 text-center mb-5">
-            <h2 class="text-uppercase heading border-bottom mb-4">Nos avis clients</h2>
-            <p class="mb-0 lead"></p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 element-animate">
-            <div class="media d-block media-testimonial text-center">
-              <img src="img/person_1.jpg" alt="Image placeholder" class="img-fluid mb-3">
-              <p>Raphaëlle Lupja<a href="#"></a></p>
-              <div class="media-body">
-                <blockquote>
-                  <p>&ldquo;Avant de rejoindre l'ile de Houat, nous avons appris l'existence d'autres iles très jolies où vivent uniquement des animaux sauvages ! C'était très beau à voir, merci pour cette découverte. Le voyage était de ce fait bien plus agréable et instructif que prévu.&rdquo;</p>
-                </blockquote>
-
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 element-animate">
-            <div class="media d-block media-testimonial text-center">
-              <img src="img/person_3.jpg" alt="Image placeholder" class="img-fluid mb-3">
-              <p>Adrien Bijblaken<a href="#"></a></p>
-              <div class="media-body">
-                <blockquote>
-                  <p>&ldquo;Très satisfait de la traversée ! Nous avons, avec ma femme et mes deux enfants, eu l'occasion de faire la traversée pour Belle-Ile-en-Mer en partant de Quiberon et ce fut un réel plaisir. Le bateau était propre et l'équipage agréable et rassurant pour les plus craintifs  . Je recommande !&rdquo;</p>
-                </blockquote>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
 
     <section class="container cta-overlap">
       <div class="text d-flex">

@@ -19,7 +19,7 @@
               <li><a href="#" data-toggle="modal" data-target="#mentions_legales">Mentions légales</a></li>
               <li><a href="#" data-toggle="modal" data-target="#protection_des_donnees">Protection des données</a></li>
               <li><a href="#" data-toggle="modal" data-target="#conditions_generales_de_vente">Conditions Générales de Vente</a></li>
-              <li><a href="#" data-toggle="modal" data-target="#conditions_denerales_d_utilisation">Conditions Générales d'utilisation</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#conditions_generales_d_utilisation">Conditions Générales d'utilisation</a></li>
               <li><a href="contact.php">Nous contacter</a></li>
             </ul>
           </div>
@@ -88,7 +88,7 @@
               <!-- Fin du modal -->
 
               <!-- Modal conditions générale d'utilisation -->
-              <div class="modal fade" id="conditions_generales_d_utilisation" tabindex="-1" role="dialog" aria-labelledby="conditions_denerales_d_utilisation" aria-hidden="true">
+              <div class="modal fade" id="conditions_generales_d_utilisation" tabindex="-1" role="dialog" aria-labelledby="conditions_generales_d_utilisation" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                       <div class="modal-header">

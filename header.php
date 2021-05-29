@@ -39,7 +39,7 @@
                 <a class="nav-link" href="index.php">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="liaisons.php">Liaisons</a>
+                <a class="nav-link" href="liaisons.php">Liaison</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="contact.php">Contact</a>

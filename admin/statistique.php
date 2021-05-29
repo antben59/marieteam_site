@@ -4,7 +4,6 @@ session_start();
 if(isset($_SESSION['grade_utilisateur'])){
 
     if($_SESSION['grade_utilisateur'] == 1){
-        include('header.php');
         include('../db_connect.php');
         include('fonction.php');
         $consulter=false;
@@ -41,6 +40,59 @@ if(isset($_SESSION['grade_utilisateur'])){
 
     }
 ?>
+   <!doctype html>
+<html lang="fr">
+  <head>
+    <title>MarieTeam Administration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=K2D:400,700|Niramit:300,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
+
+    <link rel="stylesheet" href="../fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../fonts/fontawesome/css/font-awesome.min.css">
+
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../fonts/flaticon/font/flaticon.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> <!-- Sweet Alert -->
+  </head>
+  <body>
+
+    <header role="banner">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand position-absolute" href="index.php">MarieTeam</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse position-relative" id="navbarsExample05">
+            <ul class="navbar-nav mx-auto pl-lg-5 pl-0 d-flex align-items-center">
+              <li class="nav-item">
+                <a class="nav-link" href="index.php">Gestion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="statistique.php">Statistique</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../liaisons.php">Retour au site</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../deconnexion.php">Déconnexion</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
 <div class="container">
 <!-- Affichage par section (aujourd'hui, cette semaine, ce mois-ci, cette année) -->
   <section style="margin-top : 20px;">
@@ -244,7 +296,7 @@ if(isset($_SESSION['grade_utilisateur'])){
         <li>
         Nombre de véhicule inf 2m : <?php echo $informations['QUANTITE_VEHINF']; ?>
         <br>
-        <p><?php echo "(".$informations['quantiteVoitureInf4m']." véhicule inférieur 2m et ".$informations['quantiteVoitureInf5m']." véhicule supérieur 2m)"; ?></p>
+        <p><?php echo "(".$informations['quantiteVoitureInf4m']." véhicule long inf 4m et ".$informations['quantiteVoitureInf5m']." véhicule long inf 5m)"; ?></p>
         </li>
         <li>
         Nombre de véhicule sup 2m: <?php echo $informations['QUANTITE_VEHSUP']; ?>
@@ -264,10 +316,17 @@ if(isset($_SESSION['grade_utilisateur'])){
 
 
 </div>
-
+<footer style="margin-top:200px;" class="text-center" role="contentinfo">   
+        <div class="row">
+          <div class="col-md-12">
+            <p>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> MarieTeam  <i class="fa fa-heart text-danger" aria-hidden="true"></i>
+            </p>
+          </div>
+      </div>
+</footer>
 
 <?php
-        include('footer.php');
 
     } else{
         header('location: ../error404.php');

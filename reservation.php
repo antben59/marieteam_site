@@ -75,7 +75,7 @@
                   <h5><?php echo ucwords($infosUtilisateur['adresse']); ?></h5>
                 </div>
                 <div class="col-md-3 form-group">
-                  <label for="adresse">Code postale</label>
+                  <label for="adresse">Code postal</label>
                   <h5><?php echo ucwords($infosUtilisateur['code_postal']); ?></h5>
                 </div>
                 <div class="col-md-3 form-group">

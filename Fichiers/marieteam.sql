@@ -17,9 +17,12 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+
 --
 -- Base de données : `marieteam`
 --
+CREATE DATABASE IF NOT EXISTS `marieteam` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `marieteam`;
 
 -- --------------------------------------------------------
 
@@ -33,21 +36,11 @@ CREATE TABLE IF NOT EXISTS `bateau` (
   `nom` varchar(80) CHARACTER SET utf8mb4 NOT NULL,
   `longueur` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
   `largeur` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+  `image` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
   `vitesse` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
   `equipements` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
-  `image` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`id_bateau`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `bateau`
---
-
-INSERT INTO `bateau` (`id_bateau`, `nom`, `longueur`, `largeur`, `vitesse`, `equipements`, `image`) VALUES
-(1, 'Kor\' Ant ', '1800', '30', '30', 'Accès Handicapé.Bar.Pont promenade.Plongée.', 'http://www.semainedunautisme.com/images/bateau-gonflable-rigide_10.jpg'),
-(2, 'Ar Solen', '550', '30', '50', 'Accès Handicapé.Bar.Pont promenade.Plongée.', 'https://www.masculin.com/images/article/9946/5-bateaux-de-luxe-qui-envoient-du-reve.jpg'),
-(3, 'Al\'xi', '850', '50', '50', 'Accès Handicapé.Bar.Pont promenade.Baby foot.Dansoir.', 'http://www.galerie-imagine.fr/images/image-de-bateau_10.jpg'),
-(4, 'Luce isle', '1100', '50', '80', 'Accès Handicapé.Bar.Pont promenade.Baby foot.Dansoir.', 'https://www.seafaridiving.fr/medias/img/750x420/captain-sparrow-bateau-seafari-plongee.jpg');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -61,15 +54,6 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `libelle` varchar(80) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`lettre_categorie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `categorie`
---
-
-INSERT INTO `categorie` (`lettre_categorie`, `libelle`) VALUES
-('A', 'Passager'),
-('B', 'Veh.inf.2m'),
-('C', 'Veh.sup.2m');
 
 -- --------------------------------------------------------
 
@@ -85,24 +69,6 @@ CREATE TABLE IF NOT EXISTS `contenir` (
   PRIMARY KEY (`lettre_categorie`,`id_bateau`),
   KEY `CONTENIR_BATEAU0_FK` (`id_bateau`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `contenir`
---
-
-INSERT INTO `contenir` (`lettre_categorie`, `id_bateau`, `capaciteMax`) VALUES
-('A', 1, 240),
-('A', 2, 150),
-('A', 3, 100),
-('A', 4, 500),
-('B', 1, 20),
-('B', 2, 30),
-('B', 3, 30),
-('B', 4, 50),
-('C', 1, 5),
-('C', 2, 10),
-('C', 3, 20),
-('C', 4, 25);
 
 -- --------------------------------------------------------
 
@@ -124,14 +90,6 @@ CREATE TABLE IF NOT EXISTS `liaison` (
   KEY `LIAISON_PORT1_FK` (`port_arrivee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `liaison`
---
-
-INSERT INTO `liaison` (`code_liaison`, `nom`, `distance_miles`, `id_secteur`, `port_depart`, `port_arrivee`) VALUES
-(15, 'Quiberon - Le Palais', 8.3, 1, 1, 2),
-(24, 'Le Palais - Belleville', 9, 1, 2, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -145,15 +103,6 @@ CREATE TABLE IF NOT EXISTS `periode` (
   PRIMARY KEY (`dateDeb`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `periode`
---
-
-INSERT INTO `periode` (`dateDeb`, `dateFin`) VALUES
-('2020-09-01', '2021-06-15'),
-('2021-06-16', '2021-09-15'),
-('2021-09-16', '2022-05-31');
-
 -- --------------------------------------------------------
 
 --
@@ -165,20 +114,7 @@ CREATE TABLE IF NOT EXISTS `port` (
   `id_port` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(80) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`id_port`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `port`
---
-
-INSERT INTO `port` (`id_port`, `nom`) VALUES
-(1, 'Quiberon'),
-(2, 'Le Palais'),
-(3, 'Sauzon'),
-(4, 'Vannes'),
-(5, 'Port St Gildas'),
-(6, 'Port-Tudy'),
-(7, 'Lorient');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -205,29 +141,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   PRIMARY KEY (`num_reservation`),
   KEY `RESERVATION_TRAVERSEE_FK` (`num_traversee`),
   KEY `id_utilisateurs` (`id_utilisateurs`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `reservation`
---
-
-INSERT INTO `reservation` (`num_reservation`, `num_traversee`, `id_utilisateurs`, `quantiteAdulte`, `quantiteJunior`, `quantiteEnfant`, `quantiteVoitureInf4m`, `quantiteVoitureInf5m`, `quantiteFourgon`, `quantiteCampingCar`, `quantiteCamion`, `prix`, `reduction`, `etat`) VALUES
-(15, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 0, 0),
-(16, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 5.6, 0),
-(17, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 22.4, 0, 0),
-(18, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 5.6, 0),
-(19, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 5.6, 0),
-(20, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 16.8, 5.6, 0),
-(21, 541197, 4, 0, 0, 4, 0, 0, 0, 0, 0, 22.4, 0, 0),
-(22, 541196, 4, 11, 0, 0, 0, 0, 0, 0, 0, 198, 0, 0),
-(23, 541196, 4, 11, 0, 0, 0, 0, 0, 0, 0, 198, 0, 0),
-(24, 541196, 4, 20, 25, 0, 0, 0, 10, 0, 0, 2527.5, 0, 0),
-(25, 541197, 4, 20, 30, 18, 0, 0, 10, 0, 10, 5363.8, 0, 0),
-(26, 541197, 4, 17, 0, 0, 0, 0, 0, 0, 0, 306, 0, 0),
-(27, 541196, 4, 17, 0, 0, 0, 0, 0, 0, 0, 306, 0, 0),
-(28, 541197, 4, 50, 50, 0, 0, 0, 0, 0, 0, 1091.25, 363.75, 0),
-(29, 541196, 4, 17, 0, 0, 0, 0, 0, 0, 0, 306, 0, 0),
-(30, 541196, 4, 17, 0, 0, 0, 0, 0, 0, 0, 306, 0, 0);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -240,23 +154,7 @@ CREATE TABLE IF NOT EXISTS `secteur` (
   `id_secteur` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(80) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`id_secteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `secteur`
---
-
-INSERT INTO `secteur` (`id_secteur`, `nom`) VALUES
-(1, 'Belle-Ils-en-mer'),
-(2, 'Houat'),
-(3, 'Ils de Groix'),
-(4, 'Ouessant'),
-(5, 'Molene'),
-(6, 'Sein'),
-(7, 'Brehat'),
-(8, 'Batz'),
-(9, 'Aix'),
-(10, 'Yeu');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -274,20 +172,6 @@ CREATE TABLE IF NOT EXISTS `tarifer` (
   KEY `TARIFER_LIAISON0_FK` (`code_liaison`),
   KEY `TARIFER_TYPE1_FK` (`num_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `tarifer`
---
-
-INSERT INTO `tarifer` (`dateDeb`, `code_liaison`, `num_type`, `tarif`) VALUES
-('2020-09-01', 24, 1, 18),
-('2020-09-01', 24, 2, 11.1),
-('2020-09-01', 24, 3, 5.6),
-('2020-09-01', 24, 4, 86),
-('2020-09-01', 24, 5, 129),
-('2020-09-01', 24, 6, 189),
-('2020-09-01', 24, 7, 205),
-('2020-09-01', 24, 8, 268);
 
 -- --------------------------------------------------------
 
@@ -307,14 +191,6 @@ CREATE TABLE IF NOT EXISTS `traversee` (
   KEY `TRAVERSEE_BATEAU0_FK` (`id_bateau`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `traversee`
---
-
-INSERT INTO `traversee` (`num_traversee`, `date`, `heure`, `code_liaison`, `id_bateau`) VALUES
-(541196, '2021-06-14', '09:00:00', 24, 2),
-(541197, '2021-06-14', '10:00:00', 24, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -330,20 +206,6 @@ CREATE TABLE IF NOT EXISTS `type` (
   KEY `TYPE_CATEGORIE_FK` (`lettre_categorie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `type`
---
-
-INSERT INTO `type` (`num_type`, `libelle`, `lettre_categorie`) VALUES
-(1, 'Adulte', 'A'),
-(2, 'Junior 8-18 ans', 'A'),
-(3, 'Enfant 0-7 ans', 'A'),
-(4, 'Voiture long.inf.4m', 'B'),
-(5, 'Voiture long.inf.5m', 'B'),
-(6, 'Fourgon', 'C'),
-(7, 'Camping Car', 'C'),
-(8, 'Camion', 'C');
-
 -- --------------------------------------------------------
 
 --
@@ -356,24 +218,14 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `nom` varchar(250) NOT NULL,
   `prenom` varchar(250) NOT NULL,
   `mail` varchar(250) NOT NULL,
-  `mot_de_passe` varchar(250) NOT NULL,
+  `mot_de_passe` varchar(60) NOT NULL,
   `adresse` varchar(80) NOT NULL,
   `code_postal` int(5) NOT NULL,
   `ville` varchar(30) NOT NULL,
   `point_fidelite` int(11) NOT NULL,
   `grade` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `utilisateurs`
---
-
-INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `mail`, `mot_de_passe`, `adresse`, `code_postal`, `ville`, `point_fidelite`, `grade`) VALUES
-(1, 'bjugtgtt', 'gtgtg', 'rffrfr@gmail.com', 'a', '', 0, '', 25, 0),
-(4, 'decool', 'dylan', 'dylan.decool14@gmail.com', '123', '2 rue des ormeaux', 59940, 'Estaires', 0, 1),
-(5, 'fffeeffe', 'fdefeffeef', 'a@gmail.com', 'a', 'feeeeeeeeeee', 66666, 'gfddfsgdgfs', 25, 0),
-(6, 'bbb', 'bbbbb', 'bbb@gmail.com', 'bbbbb', 'bbb', 56544, 'fgfsg', 100, 0);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contraintes pour les tables déchargées
@@ -383,45 +235,46 @@ INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `mail`, `mot_de_passe`, `adre
 -- Contraintes pour la table `contenir`
 --
 ALTER TABLE `contenir`
-  ADD CONSTRAINT `CONTENIR_BATEAU0_FK` FOREIGN KEY (`id_bateau`) REFERENCES `bateau` (`id_bateau`),
+  ADD CONSTRAINT `CONTENIR_BATEAU0_FK` FOREIGN KEY (`id_bateau`) REFERENCES `bateau` (`id_bateau`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `CONTENIR_CATEGORIE_FK` FOREIGN KEY (`lettre_categorie`) REFERENCES `categorie` (`lettre_categorie`);
 
 --
 -- Contraintes pour la table `liaison`
 --
 ALTER TABLE `liaison`
-  ADD CONSTRAINT `LIAISON_PORT0_FK` FOREIGN KEY (`port_depart`) REFERENCES `port` (`id_port`),
-  ADD CONSTRAINT `LIAISON_PORT1_FK` FOREIGN KEY (`port_arrivee`) REFERENCES `port` (`id_port`),
-  ADD CONSTRAINT `LIAISON_SECTEUR_FK` FOREIGN KEY (`id_secteur`) REFERENCES `secteur` (`id_secteur`);
+  ADD CONSTRAINT `LIAISON_PORT0_FK` FOREIGN KEY (`port_depart`) REFERENCES `port` (`id_port`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `LIAISON_PORT1_FK` FOREIGN KEY (`port_arrivee`) REFERENCES `port` (`id_port`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `LIAISON_SECTEUR_FK` FOREIGN KEY (`id_secteur`) REFERENCES `secteur` (`id_secteur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `RESERVATION_TRAVERSEE_FK` FOREIGN KEY (`num_traversee`) REFERENCES `traversee` (`num_traversee`),
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`id_utilisateurs`) REFERENCES `utilisateurs` (`id`);
+  ADD CONSTRAINT `RESERVATION_TRAVERSEE_FK` FOREIGN KEY (`num_traversee`) REFERENCES `traversee` (`num_traversee`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`id_utilisateurs`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `tarifer`
 --
 ALTER TABLE `tarifer`
-  ADD CONSTRAINT `TARIFER_LIAISON0_FK` FOREIGN KEY (`code_liaison`) REFERENCES `liaison` (`code_liaison`),
-  ADD CONSTRAINT `TARIFER_PERIODE_FK` FOREIGN KEY (`dateDeb`) REFERENCES `periode` (`dateDeb`),
-  ADD CONSTRAINT `TARIFER_TYPE1_FK` FOREIGN KEY (`num_type`) REFERENCES `type` (`num_type`);
+  ADD CONSTRAINT `TARIFER_LIAISON0_FK` FOREIGN KEY (`code_liaison`) REFERENCES `liaison` (`code_liaison`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TARIFER_PERIODE_FK` FOREIGN KEY (`dateDeb`) REFERENCES `periode` (`dateDeb`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TARIFER_TYPE1_FK` FOREIGN KEY (`num_type`) REFERENCES `type` (`num_type`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `traversee`
 --
 ALTER TABLE `traversee`
-  ADD CONSTRAINT `TRAVERSEE_BATEAU0_FK` FOREIGN KEY (`id_bateau`) REFERENCES `bateau` (`id_bateau`),
-  ADD CONSTRAINT `TRAVERSEE_LIAISON_FK` FOREIGN KEY (`code_liaison`) REFERENCES `liaison` (`code_liaison`);
+  ADD CONSTRAINT `TRAVERSEE_BATEAU0_FK` FOREIGN KEY (`id_bateau`) REFERENCES `bateau` (`id_bateau`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TRAVERSEE_LIAISON_FK` FOREIGN KEY (`code_liaison`) REFERENCES `liaison` (`code_liaison`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `type`
 --
 ALTER TABLE `type`
-  ADD CONSTRAINT `TYPE_CATEGORIE_FK` FOREIGN KEY (`lettre_categorie`) REFERENCES `categorie` (`lettre_categorie`);
+  ADD CONSTRAINT `TYPE_CATEGORIE_FK` FOREIGN KEY (`lettre_categorie`) REFERENCES `categorie` (`lettre_categorie`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
