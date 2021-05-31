@@ -43,19 +43,25 @@ include('header.php');
                   while($donnees2 = $req2->fetch()){ 
                 ?>
                   <th><?php echo $donnees2['dateDeb'] ?><br><?php echo $donnees2['dateFin'] ?></th>
-                <?php } ?>
+               
+             <?php 
+                            $a = intval($donnees1['code_liaison']);
+                            $b = $donnees2['dateDeb'];
+                            $req3 = get_bdd()->query("SELECT tarif FROM tarifer WHERE code_liaison = '$a' AND dateDeb ='$b'");
+
+            } ?>
               </tr>
             </thead>
             <tbody>
-            <?php
-              
-            ?>
               <tr>
                 <td rowspan="3"><br>A<br>Passager</td>
                 <td>A1 - Adulte</td>
+
+                 
                 <td></td>
                 <td></td>
                 <td></td>
+
               </tr>
               <tr>
                 <td>A2 - Junior 8 à 18 ans</td>
@@ -72,33 +78,33 @@ include('header.php');
 
               <tr>
                 <td rowspan="2">B<br>Véh.inf.2m</td>
-                <td></td>
+                <td>B1 - Voiture long Inf 4m</td>
                 <td></td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
-                <td></td>
+              <td>B2 - Voiture long Inf 5m</td>
                 <td></td>
                 <td></td>
                 <td></td>
               </tr>
 
               <tr>
-                <td rowspan="3">C<br>Véh.sup.2m</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
+                <td rowspan="3"><br>C<br>Véh.sup.2m</td>
+                <td>C1 - Fourgon</td>
                 <td></td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
+                <td>C2 - Camping Car</td>
                 <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>C3 - Camion</td>
                 <td></td>
                 <td></td>
                 <td></td>
