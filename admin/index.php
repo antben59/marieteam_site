@@ -31,8 +31,34 @@ if(isset($_SESSION['grade_utilisateur'])){
             echo "<center>Impossible de créer la liaison \n Les ports saisis ne sont pas compatibles</center>";
         }
     }
+  if(isset($_POST['ajouterTarification'])){
 
-    // probleme d'ajout d'une traversée dans la bdd
+    $adulte = $_POST['adulte'];
+    $junior = $_POST['junior'];
+    $enfant = $_POST['enfant'];
+    $vehlong4m = $_POST['vehlong4m'];
+    $vehlong5m = $_POST['vehlong5m'];
+    $fourgon = $_POST['fourgon'];
+    $campingcar = $_POST['campingcar'];
+    $camion = $_POST['camion'];
+    $periode = $_POST['periode'];
+    $codeLiaison = $_POST['code_liaison'];
+
+      $sql = "INSERT INTO tarifer(dateDeb,code_liaison,num_type,tarif) values 
+      ('$periode','$codeLiaison','1','$adulte'),
+      ('$periode','$codeLiaison','2','$junior'),
+      ('$periode','$codeLiaison','3','$enfant'),
+      ('$periode','$codeLiaison','4','$vehlong4m'),
+      ('$periode','$codeLiaison','5','$vehlong5m'),
+      ('$periode','$codeLiaison','6','$fourgon'),
+      ('$periode','$codeLiaison','7','$campingcar'),
+      ('$periode','$codeLiaison','8','$camion')
+      ";
+      $req = get_bdd()->prepare($sql);
+      $req->execute();
+
+  }
+
   if(isset($_POST['ajouter_traversee'])){
 
     $code_liaison = intval($_POST['code_liaison']);
@@ -42,9 +68,10 @@ if(isset($_SESSION['grade_utilisateur'])){
     $numTraverseeMax = get_bdd()->query("SELECT max(num_traversee) FROM traversee")->fetch();
     $numTraverseeMax1 = $numTraverseeMax[0]+1;
 
-        $sql = "INSERT INTO traversee (num_traversee, date, heure, code_liaison, id_bateau) VALUES ('$numTraverseeMax1','$date','$time','$code_liaison','$id_bateau')";
-        $req = get_bdd()->prepare($sql);
-        $req->execute();
+    $sql = "INSERT INTO traversee (num_traversee, date, heure, code_liaison, id_bateau) VALUES ('$numTraverseeMax1','$date','$time','$code_liaison','$id_bateau')";
+    $req = get_bdd()->prepare($sql);
+    $req->execute();
+
 
   }
     if((isset($_GET['delete']))){
@@ -226,46 +253,83 @@ if(isset($_SESSION['grade_utilisateur'])){
               <input type="time" class="form-control form-control" name="time" required>
             </div>
           </div>
-          <h5>Tarification :</h5>
-          <div class="row">
+
+
+        <input type="submit" name="ajouter_traversee" style="text-align:center;margin : 20px 0 40px 0;" class="btn btn-primary"  value="Ajouter la traversée"></input>
+        </form>
+        
+
+        <h1>Ajout d'une tarification :</h1>
+        <form action="" method="post">
+        <div class="row">
+
+            <div class="col-md-6 form-group">
+              <label for="depart">Période</label>
+                <select class="form-control form-control" name="periode">
+                  <?php 
+                    $req = get_bdd()->query("SELECT * FROM periode");
+                    while ($data = $req->fetch()){
+                    ?>
+                      <option value ="<?=$data['dateDeb'];?>"><?= $data['dateDeb']." - ".$data['dateFin']?></option>
+                    <?php } ?>
+              </select>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label for="depart">Liaison</label>
+                <select class="form-control form-control" name="code_liaison">
+                  <?php 
+                    $req = get_bdd()->query("SELECT * FROM liaison");
+                    while ($data = $req->fetch()){
+                    ?>
+                      <option value ="<?=$data['code_liaison'];?>"><?= $data['nom']?></option>
+                    <?php } ?>
+              </select>
+            </div>
+
+          </div>
+        <div class="row">
             <div class="col-md-3 form-group">
               <label for="adulte">Adulte</label>
-              <input type="text" class="form-control form-control" name="adulte" required>
+              <input type="text" class="form-control form-control" name="adulte" required value="0">
             </div>
             <div class="col-md-3 form-group">
               <label for="junior">Junior</label>
-              <input type="text" class="form-control form-control" name="junior" required>
+              <input type="text" class="form-control form-control" name="junior" required value="0">
             </div>
             <div class="col-md-3 form-group">
               <label for="enfant">Enfant</label>
-              <input type="text" class="form-control form-control" name="enfant" required>
+              <input type="text" class="form-control form-control" name="enfant" required value="0">
             </div>
             <div class="col-md-3 form-group">
               <label for="vehlong4m">Véhicule long inf 4m</label>
-              <input type="text" class="form-control form-control" name="vehlong4m" required>
+              <input type="text" class="form-control form-control" name="vehlong4m" required value="0">
             </div>
           </div>
           <div class="row">
             <div class="col-md-3 form-group">
               <label for="vehlong5m">Véhicule long inf 5m</label>
-              <input type="text" class="form-control form-control" name="vehlong5m" required>
+              <input type="text" class="form-control form-control" name="vehlong5m" required value="0">
             </div>
             <div class="col-md-3 form-group">
               <label for="fourgon">Fourgon</label>
-              <input type="text" class="form-control form-control" name="fourgon" required>
+              <input type="text" class="form-control form-control" name="fourgon" required value="0">
             </div>
             <div class="col-md-3 form-group">
               <label for="campingcar">CampingCar</label>
-              <input type="text" class="form-control form-control" name="campingcar" required>
+              <input type="text" class="form-control form-control" name="campingcar" required value="0">
             </div>
             <div class="col-md-3 form-group">
               <label for="camion">Camion</label>
-              <input type="text" class="form-control form-control" name="camion" required>
+              <input type="text" class="form-control form-control" name="camion" required value="0">
             </div>
           </div>
-
-        <input type="submit" name="ajouter_traversee" style="text-align:center;margin : 20px 0 40px 0;" class="btn btn-primary"  value="Ajouter la traversée"></input>
+          <input type="submit" name="ajouterTarification" style="text-align:center;margin : 20px 0 40px 0;" class="btn btn-primary"  value="Ajouter la tarification"></input>
         </form>
+
+
+
+
     </div>
   </div>
 </div>

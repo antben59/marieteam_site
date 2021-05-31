@@ -51,13 +51,27 @@ include('header.php');
               
             ?>
               <tr>
-                <td rowspan="3"></td>
-                <td></td>
+                <td rowspan="3"><br>A<br>Passager</td>
+                <td>A1 - Adulte</td>
                 <td></td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
+                <td>A2 - Junior 8 à 18 ans</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>A3 - Enfant 0 à 7 ans</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td rowspan="2">B<br>Véh.inf.2m</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -71,21 +85,7 @@ include('header.php');
               </tr>
 
               <tr>
-                <td rowspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td rowspan="3"></td>
+                <td rowspan="3">C<br>Véh.sup.2m</td>
                 <td></td>
                 <td></td>
                 <td></td>

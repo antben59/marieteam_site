@@ -216,7 +216,14 @@ else{
                 $newDate = date("d-m-Y", $timestamp );
                 ?>
                 <td><?php echo $newDate." à ".substr($heure_traversee, 0, -3); ?></td>
-                <td>Valider</td>
+                <td><?php
+                if($donnees['etat'] == 1){
+                  echo "Payer";
+                }else{
+                  echo "A régler";
+                }
+                
+                ?></td>
               </tr>
         <?php } ?>
             </tbody>
